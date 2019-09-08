@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="end"
+    android:orientation="vertical"
+    android:padding="16dp"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save_file_question"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/editTextBottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:autofillHints=""
+        android:hint="@string/hint_et"
+        android:inputType="textShortMessage"
+        android:textAlignment="textEnd"
+        android:textSize="16sp"
+        tools:targetApi="o" />
+
+    <!--<Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel_button" />-->
+
+    <Button
+        android:id="@+id/saveButton"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/design_default_color_primary"
+        android:text="@string/save_button"
+        app:strokeColor="@color/design_default_color_primary"
+        tools:targetApi="lollipop" />
+</LinearLayout>

@@ -1,0 +1,25 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppThemeLight" parent="Theme.MaterialComponents.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/cardview_light_background</item>
+<!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- Action bar -->
+        <item name="actionBarTheme">@style/Theme.AppCompat.Light</item>
+    </style>
+
+    <style name="AppThemeDark" parent="Theme.MaterialComponents">
+        <!-- Customize your theme here. -->
+<!--        <item name="colorOnBackground">@color/cardview_dark_background</item>-->
+<!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- Action bar -->
+        <item name="actionBarTheme">@style/Theme.AppCompat</item>
+<!--        <item name="materialCardViewStyle">@style/Theme.MaterialComponents</item>-->
+    </style>
+
+</resources>

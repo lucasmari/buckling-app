@@ -1,0 +1,106 @@
+<resources>
+    <string name="app_name">Calculadora de Flambagem</string>
+
+    <!-- TextViews -->
+    <string name="intro_tv">Essa é uma intro pra dar boas-vindas e explicar o app..</string>
+    <string name="end_condition_tv">Extremidade</string>
+    <string name="load_tv">Carga</string>
+    <string name="material_tv">Material</string>
+    <string name="cross_section_tv">Seção Transversal</string>
+    <string name="length_tv">Comprimento</string>
+    <string name="eccentricity_tv">Ecentricidade</string>
+    <string name="results_tv">Resultados</string>
+
+    <!-- ImageView -->
+    <string name="column_image_content">Imagem da coluna</string>
+
+    <!-- Buttons -->
+    <string name="clear_button">LIMPAR</string>
+    <string name="calculate_button">CALCULAR</string>
+
+    <!-- EditTexts -->
+    <string name="value_et">0</string>
+    <string name="hint_et"> </string>
+
+    <!-- Spinner Items 1 | End Condition -->
+    <string name="end_condition_1">Pinned-Pinned</string>
+    <string name="end_condition_2">Fixed-Fixed</string>
+    <string name="end_condition_3">Fixed-Pinned</string>
+    <string name="end_condition_4">Fixed-Free</string>
+
+    <!-- Materials ArrayLists Items -->
+    <string name="material_1">Aço</string>
+    <string name="yield_strength_1">137.9E6</string>
+    <string name="elastic_modulus_1">68.95E9</string>
+    <string name="material_2">Madeira</string>
+    <string name="yield_strength_2">150E6</string>
+    <string name="elastic_modulus_2">90E9</string>
+
+    <!-- Cross Sections ArrayLists Items -->
+    <string name="cross_section_1">Retangular</string>
+    <string name="area_1">51.61E-4</string>
+    <string name="centroidal_distance_1">0.02540</string>
+    <string name="gyration_radius_1">0.01466</string>
+    <string name="inertia_moment_1">111E-5</string>
+    <string name="cross_section_2">Circular</string>
+    <string name="area_2">51.61E-4</string>
+    <string name="centroidal_distance_2">0.02540</string>
+    <string name="gyration_radius_2">0.01466</string>
+    <string name="inertia_moment_2">111E-5</string>
+
+    <!-- Results ArrayList Items -->
+    <string name="critical_stress">Tensão Crítica</string>
+    <string name="critical_force">Força Crítica</string>
+    <string name="safety_factor">Fator de segurança</string>
+    <string name="stress_unit_si">Pa</string>
+    <string name="force_unit_si">N</string>
+    <string name="stress_unit_us"></string>
+    <string name="force_unit_us"></string>
+
+    <!-- Charts -->
+    <string name="stress_line_chart">Tensão Crítica x Comprimento</string>
+    <string name="force_line_chart">Força Crítica x Comprimento</string>
+    <string name="stress_curve">Curva de Tensão Crítica</string>
+    <string name="stress_axis">Tensão [MPa]</string>
+    <string name="force_curve">Curva de Força Crítica</string>
+    <string name="force_axis">Força [N]</string>
+    <string name="length_axis">Comprimento [m]</string>
+
+    <!-- Options Menu -->
+    <string name="share_option">Compartilhar</string>
+    <string name="settings_option">Configurações</string>
+    <string name="export_option">Exportar para CSV</string>
+
+    <!-- Preference Titles -->
+    <string name="customization_title">Customização</string>
+    <string name="units_system_title">Sistema de Unidades</string>
+
+    <!-- Customization Preferences -->
+    <string name="switch_theme_key">switch_theme</string>
+    <string name="theme_title">Tema Escuro</string>
+    <string name="drop_down_language_key">drop_down_language</string>
+    <string name="select_language_title">Selecione seu idioma</string>
+    <string name="english_value">Inglês</string>
+    <string name="portuguese_value">Portugês</string>
+
+    <!-- Units System Preferences -->
+    <string name="drop_down_units_key">drop_down_units</string>
+    <string name="select_units_system_title">Selecione o sistema</string>
+
+    <!-- Share -->
+    <string name="share_title">Compartilhar com</string>
+
+    <!-- Export -->
+    <string name="export_denied_message">Você precisa conceder acesso para exportar</string>
+    <string name="exporting_message">Exportando para arquivo…</string>
+    <string name="success_message">Pronto!</string>
+    <string name="fail_creating_file_message">Erro ao criar arquivo… tente de novo!</string>
+    <string name="fail_reading_file_message">Erro ao ler arquivo… tente de novo!</string>
+    <string name="fail_writing_file_message">Erro ao escrever arquivo… tente de novo!</string>
+    <string name="fail_path_message">Erro no caminho do arquivo… tente de novo!</string>
+
+    <!-- Bottom Sheet Dialog -->
+    <string name="save_file_question">Salvar como</string>
+    <string name="save_button">Salvar</string>
+    <string name="cancel_button">Cancelar</string>
+</resources>

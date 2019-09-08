@@ -1,0 +1,106 @@
+<resources>
+    <string name="app_name">Buckling Calculator</string>
+
+    <!-- Text Views -->
+    <string name="intro_tv">This is an intro to welcome the user and explain how to use the app..</string>
+    <string name="end_condition_tv">End condition</string>
+    <string name="load_tv">Load</string>
+    <string name="material_tv">Material</string>
+    <string name="cross_section_tv">Cross section</string>
+    <string name="length_tv">Length</string>
+    <string name="eccentricity_tv">Eccentricity</string>
+    <string name="results_tv">Results</string>
+
+    <!-- Others -->
+    <string name="column_image_content">Column image</string>
+
+    <!-- Buttons -->
+    <string name="clear_button">CLEAR</string>
+    <string name="calculate_button">CALCULATE</string>
+
+    <!-- EditTexts -->
+    <string name="value_et">0</string>
+    <string name="hint_et"> </string>
+
+    <!-- Spinner Items 1 | End Condition -->
+    <string name="end_condition_1">Pinned-Pinned</string>
+    <string name="end_condition_2">Fixed-Fixed</string>
+    <string name="end_condition_3">Fixed-Pinned</string>
+    <string name="end_condition_4">Fixed-Free</string>
+
+    <!-- Materials ArrayLists Items -->
+    <string name="material_1">Steel</string>
+    <string name="yield_strength_1">137.9E6</string>
+    <string name="elastic_modulus_1">68.95E9</string>
+    <string name="material_2">Wood</string>
+    <string name="yield_strength_2">150E6</string>
+    <string name="elastic_modulus_2">90E9</string>
+
+    <!-- Cross Sections ArrayLists Items -->
+    <string name="cross_section_1">Rectangle</string>
+    <string name="area_1">51.61E-4</string>
+    <string name="centroidal_distance_1">0.02540</string>
+    <string name="gyration_radius_1">0.01466</string>
+    <string name="inertia_moment_1">111E-5</string>
+    <string name="cross_section_2">Circle</string>
+    <string name="area_2">51.61E-4</string>
+    <string name="centroidal_distance_2">0.02540</string>
+    <string name="gyration_radius_2">0.01466</string>
+    <string name="inertia_moment_2">111E-5</string>
+
+    <!-- Results ArrayList Items -->
+    <string name="critical_stress">Critical Stress</string>
+    <string name="critical_force">Critical Force</string>
+    <string name="safety_factor">Safety Factor</string>
+    <string name="stress_unit_si">Pa</string>
+    <string name="force_unit_si">N</string>
+    <string name="stress_unit_us"></string>
+    <string name="force_unit_us"></string>
+
+    <!-- Charts -->
+    <string name="stress_line_chart">Critical Stress x Length</string>
+    <string name="force_line_chart">Critical Force x Length</string>
+    <string name="stress_curve">Critical Stress Curve</string>
+    <string name="stress_axis">Stress [MPa]</string>
+    <string name="force_curve">Critical Force Curve</string>
+    <string name="force_axis">Force [N]</string>
+    <string name="length_axis">Length [m]</string>
+
+    <!-- Options Menu -->
+    <string name="share_option">Share</string>
+    <string name="settings_option">Settings</string>
+    <string name="export_option">Export to CSV</string>
+
+    <!-- Preferences -->
+    <string name="customization_title">Customization</string>
+    <string name="units_system_title">Units System</string>
+
+    <!-- Customization Preferences -->
+    <string name="switch_theme_key">switch_theme</string>
+    <string name="theme_title">Dark Theme</string>
+    <string name="drop_down_language_key">drop_down_language</string>
+    <string name="select_language_title">Select your language</string>
+    <string name="english_value">English</string>
+    <string name="portuguese_value">Portuguese</string>
+
+    <!-- Units System Preferences -->
+    <string name="drop_down_units_key">drop_down_units</string>
+    <string name="select_units_system_title">Select the system</string>
+
+    <!-- Share -->
+    <string name="share_title">Share with</string>
+
+    <!-- Export -->
+    <string name="export_denied_message">You need to grant access to export!</string>
+    <string name="exporting_message">Exporting to file…</string>
+    <string name="success_message">Done!</string>
+    <string name="fail_creating_file_message">Error creating file… try again!</string>
+    <string name="fail_reading_file_message">Error reading file… try again!</string>
+    <string name="fail_writing_file_message">Error writing file… try again!</string>
+    <string name="fail_path_message">Error in path… try again!</string>
+
+    <!-- Bottom Sheet Dialog -->
+    <string name="save_file_question">Save as</string>
+    <string name="save_button">Save</string>
+    <string name="cancel_button">Cancel</string>
+</resources>

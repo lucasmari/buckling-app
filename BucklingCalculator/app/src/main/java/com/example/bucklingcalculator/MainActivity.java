@@ -114,15 +114,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         Button clearButton = findViewById(R.id.clearButton);
 //        TextView introTextView = findViewById(R.id.introTextView);
         recyclerView = findViewById(R.id.resultsView);
-        recyclerView.setHasFixedSize(true);
-        List<Results> resultsList = Results.createResultsList(getResources());
-        List<Chart> chartList = Chart.createChartList(getResources());
-        ArrayList list = new ArrayList();
-        list.add(resultsList.get(0));
-        list.add(chartList.get(0));
-        list.add(chartList.get(1));
-        Log.d("LIST: ", list.get(0).toString() + list.get(1).toString());
-        final ResultsAdapter resultsAdapter = new ResultsAdapter(this, list, chartList);
 
         ConstraintSet constraintSet1 = new ConstraintSet();
         constraintSet1.clone(this, R.layout.activity_main);
@@ -226,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 load = Double.valueOf(editText2.getText().toString());
                 eccentricity = Double.valueOf(editText3.getText().toString());
 
-                setResults(resultsAdapter);
+                setResults();
 
                 TransitionManager.beginDelayedTransition(layout);
                 constraintSet2.applyTo(layout);
@@ -400,7 +391,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     criticalStressByLength.add(yieldStrength - (Math.pow((yieldStrength * effectiveLengthFactor * i) / (2 * Math.PI * gyrationRadius), 2)) * (1 / elasticModulus));
                 }
                 for (double i = 1.47; i < length; i += 0.1) {
-                    criticalStressByLength.add((Math.pow(Math.PI, 2) * elasticModulus) / Math.pow((effectiveLengthFactor * length /gyrationRadius), 2));
+                    criticalStressByLength.add((Math.pow(Math.PI, 2) * elasticModulus) / Math.pow((effectiveLengthFactor * i /gyrationRadius), 2));
                 }
             }
         }
@@ -425,11 +416,21 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         return safetyFactor;
     }
 
-    public void setResults(ResultsAdapter resultsAdapter) {
+    public void setResults() {
         results.add(0, calculateCriticalStress());
         results.add(1, calculateCriticalForce());
         results.add(2, calculateSafetyFactor());
 
+        List<Results> resultsList = Results.createResultsList(getResources());
+        List<Chart> chartList = Chart.createChartList(getResources());
+        ArrayList list = new ArrayList();
+        list.add(resultsList.get(0));
+        list.add(chartList.get(0));
+        list.add(chartList.get(1));
+        final ResultsAdapter resultsAdapter = new ResultsAdapter(this, list, resultsList,
+                chartList);
+
+        recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(resultsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

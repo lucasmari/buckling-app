@@ -17,6 +17,7 @@ import static com.example.bucklingcalculator.MainActivity.results;
 
 public class ResultsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ArrayList list;
+    private List<Results> resultsList;
     private List<Chart> chartList;
     private Context context;
     private static final int ITEM_TYPE_RESULTS = 0;
@@ -57,9 +58,11 @@ public class ResultsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    ResultsAdapter(Context context, ArrayList list, List<Chart> chartList) {
-        this.chartList = chartList;
+    ResultsAdapter(Context context, ArrayList list, List<Results> resultsList,
+                   List<Chart> chartList) {
         this.list = list;
+        this.resultsList = resultsList;
+        this.chartList = chartList;
         this.context = context;
     }
 
@@ -96,13 +99,8 @@ public class ResultsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             chartTextView.setText(chart.getName());
         } else {
             TextView resultsTextView = ((ResultsViewHolder) viewHolder).resultsTextView;
-            resultsTextView.append("\n\n" + getContext().getString(R.string.critical_stress) + ":" +
-                    " " +
-                    convert(results.get(0), 2) + getContext().getString(R.string.stress_unit_si));
-            resultsTextView.append("\n" + getContext().getString(R.string.critical_force) + ": " +
-                    convert(results.get(1), 2) + getContext().getString(R.string.force_unit_si));
-            resultsTextView.append("\n" + getContext().getString(R.string.safety_factor) + ": " +
-                    convert(results.get(2), 2));
+            Results results = resultsList.get(position);
+            resultsTextView.setText(results.getName());
         }
     }
 

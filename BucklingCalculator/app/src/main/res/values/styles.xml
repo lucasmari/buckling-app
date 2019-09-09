@@ -19,7 +19,9 @@
 
         <!-- Action bar -->
         <item name="actionBarTheme">@style/Theme.AppCompat</item>
-<!--        <item name="materialCardViewStyle">@style/Theme.MaterialComponents</item>-->
     </style>
 
+    <style name="CustomCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">?attr/colorSurface</item>
+    </style>
 </resources>

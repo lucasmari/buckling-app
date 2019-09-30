@@ -43,6 +43,5 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/design_default_color_primary"
         android:text="@string/save_button"
-        app:strokeColor="@color/design_default_color_primary"
         tools:targetApi="lollipop" />
 </LinearLayout>

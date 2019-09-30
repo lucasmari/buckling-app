@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -70,8 +71,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private double safetyFactor;
 
     // Material/Cross Section ArrayLists
-    private ArrayList[] materials = new ArrayList[3];
-    private ArrayList[] crossSections = new ArrayList[5];
+    public static ArrayList[] materials = new ArrayList[3];
+    public static ArrayList materialsProperties = new ArrayList();
+    public static ArrayList[] crossSections = new ArrayList[5];
+    public static ArrayList crossSectionsProperties = new ArrayList();
 
     // Results ArrayList
     public static ArrayList<Double> results = new ArrayList<>();
@@ -81,6 +84,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public CheckBox checkBox;
     private EditText editText3;
     private RecyclerView recyclerView;
+    private Spinner spinner2;
+    private Spinner spinner3;
 
     // Permissions
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -104,8 +109,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         ConstraintLayout layout = findViewById(R.id.layout);
         ImageView columnImageView = findViewById(R.id.columnImageView);
         Spinner spinner1 = findViewById(R.id.spinner1);
-        Spinner spinner2 = findViewById(R.id.spinner2);
-        Spinner spinner3 = findViewById(R.id.spinner3);
+        spinner2 = findViewById(R.id.spinner2);
+        spinner3 = findViewById(R.id.spinner3);
         EditText editText1 = findViewById(R.id.editText1);
         EditText editText2 = findViewById(R.id.editText2);
         checkBox = findViewById(R.id.checkBox);
@@ -122,9 +127,15 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         // Materials ArrayLists initialization
         initializeMaterials();
+        materialsProperties.add(getString(R.string.yield_strength_title));
+        materialsProperties.add(getString(R.string.elastic_modulus_title));
 
         // Cross Sections ArrayLists initialization
         initializeCrossSection();
+        crossSectionsProperties.add(getString(R.string.area_title));
+        crossSectionsProperties.add(getString(R.string.centroidal_distance_title));
+        crossSectionsProperties.add(getString(R.string.gyration_radius_title));
+        crossSectionsProperties.add(getString(R.string.inertia_moment_title));
 
         // Results initialization
         initializeResults();
@@ -268,6 +279,14 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             case R.id.export:
                 verifyStoragePermissions();
                 return true;
+            case R.id.materials:
+                intent = new Intent(this, MaterialsActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.cross_sections:
+                intent = new Intent(this, CrossSectionsActivity.class);
+                startActivity(intent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -291,16 +310,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         crossSections[0].add(getString(R.string.cross_section_2));
         crossSections[1] = new ArrayList();
         crossSections[1].add(getString(R.string.area_1));
-        crossSections[1].add(90E9);
+        crossSections[1].add(getString(R.string.area_2));
         crossSections[2] = new ArrayList();
         crossSections[2].add(getString(R.string.centroidal_distance_1));
-        crossSections[2].add(90E9);
+        crossSections[2].add(getString(R.string.centroidal_distance_2));
         crossSections[3] = new ArrayList();
         crossSections[3].add(getString(R.string.gyration_radius_1));
-        crossSections[3].add(90E9);
+        crossSections[3].add(getString(R.string.gyration_radius_2));
         crossSections[4] = new ArrayList();
         crossSections[4].add(getString(R.string.inertia_moment_1));
-        crossSections[4].add(90E9);
+        crossSections[4].add(getString(R.string.inertia_moment_2));
     }
 
     public void initializeResults() {
@@ -338,6 +357,28 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         List<String> spinnerArray = new ArrayList<>();
         spinnerArray.add(getResources().getString(R.string.cross_section_1));
         spinnerArray.add(getResources().getString(R.string.cross_section_2));
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this, R.layout.item_spinner, spinnerArray);
+        spinner3.setAdapter(adapter);
+    }
+
+    public void reloadSpinnerAdapter2(Spinner spinner2) {
+        List<String> spinnerArray = new ArrayList<>();
+        for (int i = 0; i < materials[0].size(); i++) {
+            spinnerArray.add(materials[0].get(i).toString());
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this, R.layout.item_spinner, spinnerArray);
+        spinner2.setAdapter(adapter);
+    }
+
+    public void reloadSpinnerAdapter3(Spinner spinner3) {
+        List<String> spinnerArray = new ArrayList<>();
+        for (int i = 0; i < crossSections[0].size(); i++) {
+            spinnerArray.add(crossSections[0].get(i).toString());
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this, R.layout.item_spinner, spinnerArray);
@@ -544,13 +585,20 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         });
     }
 
-    public void setupSharedPreferences() {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reloadSpinnerAdapter2(spinner2);
+        reloadSpinnerAdapter3(spinner3);
+    }
+
+    private void setupSharedPreferences() {
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
         switchTheme(sharedPreferences.getBoolean(getString(R.string.switch_theme_key), false));
         switchLanguage(sharedPreferences.getString(getString(R.string.drop_down_language_key),
-                getString(R.string.english_value)));
+                getResources().getString(R.string.english_value)));
     }
 
     @Override
@@ -567,7 +615,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             recreate();
         } else if (key.equals(getString(R.string.drop_down_language_key))) {
             switchLanguage(sharedPreferences.getString(key,
-                    getString(R.string.english_value)));
+                    getResources().getString(R.string.english_value)));
             recreate();
         }
     }
@@ -584,7 +632,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }
     }
 
-    public void switchTheme(boolean b) {
+    private void switchTheme(boolean b) {
         if (b) {
             this.setTheme(R.style.AppThemeDark);
         } else {

@@ -4,33 +4,72 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceFragmentCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Locale;
 
-public class SettingsActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+import static com.example.bucklingcalculator.MainActivity.materials;
+
+public class MaterialsActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+    private static MaterialsAdapter materialsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_materials);
         setupSharedPreferences();
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.settings, new SettingsFragment())
-                .commit();
+        RecyclerView recyclerView = findViewById(R.id.list);
+        materialsAdapter = new MaterialsAdapter(Materials.ITEMS, getSupportFragmentManager());
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(materialsAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> showAddDialog());
     }
 
-    public static class SettingsFragment extends PreferenceFragmentCompat {
+    public static class AddDialogFragment extends DialogFragment {
         @Override
-        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            setPreferencesFromResource(R.xml.root_preferences, rootKey);
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.dialog_add_material, container, false);
+            EditText editText1 = view.findViewById(R.id.dialogEditText1);
+            EditText editText2 = view.findViewById(R.id.dialogEditText2);
+            EditText editText3 = view.findViewById(R.id.dialogEditText3);
+            Button saveButton = view.findViewById(R.id.dialogSaveButton);
+            saveButton.setOnClickListener(v -> {
+                materials[0].add(editText1.getText().toString());
+                materials[1].add(editText2.getText().toString());
+                materials[2].add(editText3.getText().toString());
+                materialsAdapter.addItem(Materials.createMaterial(materials[0].size()-1),
+                        materials[0].size()-1);
+                AddDialogFragment.this.dismiss();
+            });
+            Button cancelButton = view.findViewById(R.id.dialogCancelButton);
+            cancelButton.setOnClickListener(v -> AddDialogFragment.this.getDialog().cancel());
+
+            return view;
         }
+    }
+
+    public void showAddDialog() {
+        // Create an instance of the dialog fragment and show it
+        DialogFragment dialog = new AddDialogFragment();
+        dialog.show(this.getSupportFragmentManager(), "AddDialogFragment");
     }
 
     private void setupSharedPreferences() {

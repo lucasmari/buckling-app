@@ -4,7 +4,7 @@
     <style name="AppThemeLight" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/cardview_light_background</item>
-<!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
         <item name="colorAccent">@color/colorAccent</item>
 
         <!-- Action bar -->
@@ -13,8 +13,8 @@
 
     <style name="AppThemeDark" parent="Theme.MaterialComponents">
         <!-- Customize your theme here. -->
-<!--        <item name="colorOnBackground">@color/cardview_dark_background</item>-->
-<!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <!--        <item name="colorOnBackground">@color/cardview_dark_background</item>-->
+        <!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
         <item name="colorAccent">@color/colorAccent</item>
 
         <!-- Action bar -->
@@ -24,4 +24,13 @@
     <style name="CustomCardView" parent="Widget.MaterialComponents.CardView">
         <item name="cardBackgroundColor">?attr/colorSurface</item>
     </style>
+
+    <style name="AppThemeLight.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppThemeLight.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppThemeLight.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="300dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/dialogTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/dialog_edit_title"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/dialogEditText1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="4dp"
+        android:autofillHints=""
+        android:hint="@string/cross_section_tv"
+        android:inputType="text"
+        android:textAlignment="textEnd"
+        tools:targetApi="o" />
+
+    <EditText
+        android:id="@+id/dialogEditText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="16dp"
+        android:autofillHints=""
+        android:fontFamily="sans-serif"
+        android:hint="@string/area_title"
+        android:inputType="text"
+        android:textAlignment="textEnd"
+        tools:targetApi="o" />
+
+    <EditText
+        android:id="@+id/dialogEditText3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="16dp"
+        android:autofillHints=""
+        android:fontFamily="sans-serif"
+        android:hint="@string/centroidal_distance_title"
+        android:inputType="text"
+        android:textAlignment="textEnd"
+        tools:targetApi="o" />
+
+    <EditText
+        android:id="@+id/dialogEditText4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="16dp"
+        android:autofillHints=""
+        android:fontFamily="sans-serif"
+        android:hint="@string/gyration_radius_title"
+        android:inputType="text"
+        android:textAlignment="textEnd"
+        tools:targetApi="o" />
+
+    <EditText
+        android:id="@+id/dialogEditText5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="16dp"
+        android:autofillHints=""
+        android:fontFamily="sans-serif"
+        android:hint="@string/inertia_moment_title"
+        android:inputType="text"
+        android:textAlignment="textEnd"
+        tools:targetApi="o" />
+
+    <Button
+        android:id="@+id/dialogSaveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/save_button"
+        app:backgroundTint="@color/design_default_color_primary" />
+
+    <Button
+        android:id="@+id/dialogCancelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/cancel_button"
+        app:backgroundTint="@color/design_default_color_primary" />
+
+</LinearLayout>

@@ -14,4 +14,10 @@
     <item
         android:id="@+id/export"
         android:title="@string/export_option" />
+    <item
+        android:id="@+id/materials"
+        android:title="@string/materials_option" />
+    <item
+        android:id="@+id/cross_sections"
+        android:title="@string/cross_sections_option" />
 </menu>

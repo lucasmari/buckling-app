@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.bucklingcalculator">
-
-    <uses-permission-sdk-23 android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name="androidx.multidex.MultiDexApplication"
@@ -11,20 +9,19 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppThemeLight">
-        <activity android:name=".StressLineChartActivity"></activity>
-        <activity android:name=".ForceLineChartActivity"></activity>
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppThemeLight"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/settings_option"
-            android:parentActivityName=".MainActivity"></activity>
+            android:label="@string/settings_option" />
         <activity android:name=".ShareActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -34,6 +31,23 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MaterialsActivity"
+            android:label="@string/materials_option" />
+        <activity
+            android:name=".CrossSectionsActivity"
+            android:label="@string/cross_sections_option" />
+        <activity
+            android:name=".StressLineChartActivity"
+            android:label="@string/stress_chart_title" />
+        <activity
+            android:name=".ForceLineChartActivity"
+            android:label="@string/force_chart_title" />
+        <activity android:name=".Chart" />
     </application>
+
+    <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission-sdk-23 android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

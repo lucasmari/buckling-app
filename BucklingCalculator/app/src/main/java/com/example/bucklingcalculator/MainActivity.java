@@ -81,9 +81,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public static ArrayList<Double> criticalStressByLength = new ArrayList<>();
     public static ArrayList<Double> criticalForceByLength = new ArrayList<>();
 
-    public CheckBox checkBox;
+    private ImageView columnImageView;
+    private CheckBox checkBox;
     private EditText editText3;
     private RecyclerView recyclerView;
+    private Spinner spinner1;
     private Spinner spinner2;
     private Spinner spinner3;
 
@@ -95,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     };
 
     private String fileName = "";
+    private boolean theme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,8 +110,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         // Components declaration
         ConstraintLayout layout = findViewById(R.id.layout);
-        ImageView columnImageView = findViewById(R.id.columnImageView);
-        Spinner spinner1 = findViewById(R.id.spinner1);
+        columnImageView = findViewById(R.id.columnImageView);
+        spinner1 = findViewById(R.id.spinner1);
         spinner2 = findViewById(R.id.spinner2);
         spinner3 = findViewById(R.id.spinner3);
         EditText editText1 = findViewById(R.id.editText1);
@@ -120,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 //        TextView introTextView = findViewById(R.id.introTextView);
         recyclerView = findViewById(R.id.resultsView);
 
+        // Layouts constraints
         ConstraintSet constraintSet1 = new ConstraintSet();
         constraintSet1.clone(this, R.layout.activity_main);
         ConstraintSet constraintSet2 = new ConstraintSet();
@@ -127,15 +131,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         // Materials ArrayLists initialization
         initializeMaterials();
-        materialsProperties.add(getString(R.string.yield_strength_title));
-        materialsProperties.add(getString(R.string.elastic_modulus_title));
+        initializeMaterialsProperties();
 
         // Cross Sections ArrayLists initialization
-        initializeCrossSection();
-        crossSectionsProperties.add(getString(R.string.area_title));
-        crossSectionsProperties.add(getString(R.string.centroidal_distance_title));
-        crossSectionsProperties.add(getString(R.string.gyration_radius_title));
-        crossSectionsProperties.add(getString(R.string.inertia_moment_title));
+        initializeCrossSections();
+        initializeCrossSectionsProperties();
 
         // Results initialization
         initializeResults();
@@ -153,18 +153,27 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     case 1:
                         effectiveLengthFactor = 0.9;
                         columnImageView.startAnimation(fade_out);
-                        columnImageView.setImageResource(R.mipmap.img_column_fixed_fixed);
+                        if (theme)
+                            columnImageView.setImageResource(R.mipmap.img_column_fixed_fixed_dark);
+                        else
+                            columnImageView.setImageResource(R.mipmap.img_column_fixed_fixed);
                         columnImageView.startAnimation(fade_in);
                         break;
                     case 2:
                         effectiveLengthFactor = 0.9;
                         columnImageView.startAnimation(fade_out);
+                        if (theme)
+                            columnImageView.setImageResource(R.mipmap.img_column_fixed_pinned_dark);
+                        else
                         columnImageView.setImageResource(R.mipmap.img_column_fixed_pinned);
                         columnImageView.startAnimation(fade_in);
                         break;
                     case 3:
                         effectiveLengthFactor = 2.1;
                         columnImageView.startAnimation(fade_out);
+                        if (theme)
+                            columnImageView.setImageResource(R.mipmap.img_column_fixed_free_dark);
+                        else
                         columnImageView.setImageResource(R.mipmap.img_column_fixed_free);
                         columnImageView.startAnimation(fade_in);
                         break;
@@ -172,6 +181,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     default:
                         effectiveLengthFactor = 1;
                         columnImageView.startAnimation(fade_out);
+                        if (theme)
+                            columnImageView.setImageResource(R.mipmap.img_column_pinned_pinned_dark);
+                        else
                         columnImageView.setImageResource(R.mipmap.img_column_pinned_pinned);
                         columnImageView.startAnimation(fade_in);
                         break;
@@ -304,7 +316,12 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         materials[2].add(getString(R.string.elastic_modulus_2));
     }
 
-    public void initializeCrossSection() {
+    public void initializeMaterialsProperties() {
+        materialsProperties.add(getString(R.string.yield_strength_title));
+        materialsProperties.add(getString(R.string.elastic_modulus_title));
+    }
+
+    public void initializeCrossSections() {
         crossSections[0] = new ArrayList();
         crossSections[0].add(getString(R.string.cross_section_1));
         crossSections[0].add(getString(R.string.cross_section_2));
@@ -320,6 +337,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         crossSections[4] = new ArrayList();
         crossSections[4].add(getString(R.string.inertia_moment_1));
         crossSections[4].add(getString(R.string.inertia_moment_2));
+    }
+
+    public void initializeCrossSectionsProperties() {
+        crossSectionsProperties.add(getString(R.string.area_title));
+        crossSectionsProperties.add(getString(R.string.centroidal_distance_title));
+        crossSectionsProperties.add(getString(R.string.gyration_radius_title));
+        crossSectionsProperties.add(getString(R.string.inertia_moment_title));
     }
 
     public void initializeResults() {
@@ -414,9 +438,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             for (double i = 0; i < length; i += 0.1) {
                 criticalStressByLength.add((load / area) * (1 + ((eccentricity * centroidalDistance) / Math.pow(gyrationRadius, 2)) * Math.acos(((effectiveLengthFactor * i) / (2 * gyrationRadius)) * Math.sqrt(load / (area * elasticModulus)))));
             }
-        }
-
-        else {
+        } else {
             if (length < 1.47) {
                 criticalStress =
                         yieldStrength - (Math.pow((yieldStrength * effectiveLengthFactor * length) / (2 * Math.PI * gyrationRadius), 2)) * (1 / elasticModulus);
@@ -426,13 +448,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 }
             } else {
                 criticalStress =
-                        (Math.pow(Math.PI, 2) * elasticModulus) / Math.pow((effectiveLengthFactor * length /gyrationRadius), 2);
+                        (Math.pow(Math.PI, 2) * elasticModulus) / Math.pow((effectiveLengthFactor * length / gyrationRadius), 2);
 
                 for (double i = 0; i < 1.47; i += 0.1) {
                     criticalStressByLength.add(yieldStrength - (Math.pow((yieldStrength * effectiveLengthFactor * i) / (2 * Math.PI * gyrationRadius), 2)) * (1 / elasticModulus));
                 }
                 for (double i = 1.47; i < length; i += 0.1) {
-                    criticalStressByLength.add((Math.pow(Math.PI, 2) * elasticModulus) / Math.pow((effectiveLengthFactor * i /gyrationRadius), 2));
+                    criticalStressByLength.add((Math.pow(Math.PI, 2) * elasticModulus) / Math.pow((effectiveLengthFactor * i / gyrationRadius), 2));
                 }
             }
         }
@@ -623,7 +645,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     public final void setTheme(final int resid) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean theme = sharedPreferences.getBoolean(getString(R.string.switch_theme_key), false);
+        theme = sharedPreferences.getBoolean(getString(R.string.switch_theme_key), false);
 
         if (theme) {
             super.setTheme(R.style.AppThemeDark);

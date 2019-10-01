@@ -1,0 +1,419 @@
+@startuml
+
+title __BUCKLINGCALCULATOR's Class Diagram__\n
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.Chart {
+        - activityClass : Class
+        - name : String
+        + getName()
+        {static} ~ createChartList()
+        ~ getActivityClass()
+        - Chart()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.CrossSections {
+        {static} + ITEMS : List<CrossSection>
+        {static} + createCrossSection()
+        {static} + editCrossSection()
+        {static} - addItem()
+        {static} - makeDetails()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.CrossSections.CrossSection {
+        + content : String
+        + details : String
+        + id : int
+        + CrossSection()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.CrossSectionsActivity {
+        {static} - crossSectionsAdapter : CrossSectionsAdapter
+        + onDestroy()
+        + onSharedPreferenceChanged()
+        + setTheme()
+        + showAddDialog()
+        # onCreate()
+        - setupSharedPreferences()
+        - switchLanguage()
+        - switchTheme()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.CrossSectionsActivity.AddDialogFragment {
+        + onCreateView()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.CrossSectionsAdapter {
+        ~ fragmentManager : FragmentManager
+        {static} - mValues : List<CrossSection>
+        + CrossSectionsAdapter()
+        + addItem()
+        + deleteItem()
+        + getItemCount()
+        + onBindViewHolder()
+        + onCreateViewHolder()
+        + showEditDialog()
+        - editItem()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.CrossSectionsAdapter.EditDialogFragment {
+        - position : int
+        + onCreateView()
+        - EditDialogFragment()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.CrossSectionsAdapter.ViewHolder {
+        + mContentView : TextView
+        + mDelete : ImageView
+        + mDetails : TextView
+        + mView : View
+        + ViewHolder()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.ForceLineChartActivity {
+        + onDestroy()
+        + onSharedPreferenceChanged()
+        + setTheme()
+        # onCreate()
+        - setupSharedPreferences()
+        - switchLanguage()
+        - switchTheme()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.ForceLineChartActivity.CustomDataEntry {
+        ~ CustomDataEntry()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.MainActivity {
+        {static} + criticalForceByLength : ArrayList<Double>
+        {static} + criticalStressByLength : ArrayList<Double>
+        {static} + crossSections : ArrayList[]
+        {static} + crossSectionsProperties : ArrayList
+        {static} + length : double
+        {static} + materials : ArrayList[]
+        {static} + materialsProperties : ArrayList
+        {static} + results : ArrayList<Double>
+        {static} - PERMISSIONS_STORAGE : String[]
+        {static} - REQUEST_EXTERNAL_STORAGE : int
+        - area : double
+        - centroidalDistance : double
+        - checkBox : CheckBox
+        - columnImageView : ImageView
+        - criticalForce : double
+        - criticalStress : double
+        - eccentricity : double
+        - editText3 : EditText
+        - effectiveLengthFactor : double
+        - elasticModulus : double
+        - fileName : String
+        - gyrationRadius : double
+        - inertiaMoment : double
+        - load : double
+        - recyclerView : RecyclerView
+        - safetyFactor : double
+        - spinner1 : Spinner
+        - spinner2 : Spinner
+        - spinner3 : Spinner
+        - theme : boolean
+        - yieldStrength : double
+        + calculateCriticalForce()
+        + calculateCriticalStress()
+        + calculateSafetyFactor()
+        {static} + convert()
+        + exportToFile()
+        + initializeCrossSections()
+        + initializeCrossSectionsProperties()
+        + initializeMaterials()
+        + initializeMaterialsProperties()
+        + initializeResults()
+        + onCreateOptionsMenu()
+        + onDestroy()
+        + onOptionsItemSelected()
+        + onSharedPreferenceChanged()
+        + reloadSpinnerAdapter2()
+        + reloadSpinnerAdapter3()
+        + setResults()
+        + setSpinnerAdapter1()
+        + setSpinnerAdapter2()
+        + setSpinnerAdapter3()
+        + setTheme()
+        + showBottomSheetDialog()
+        + validInputs()
+        + verifyStoragePermissions()
+        # onCreate()
+        # onResume()
+        - setupSharedPreferences()
+        - switchLanguage()
+        - switchTheme()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.Materials {
+        {static} + ITEMS : List<Material>
+        {static} + createMaterial()
+        {static} + editMaterial()
+        {static} - addItem()
+        {static} - makeDetails()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.Materials.Material {
+        + content : String
+        + details : String
+        + id : int
+        + Material()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.MaterialsActivity {
+        {static} - materialsAdapter : MaterialsAdapter
+        + onDestroy()
+        + onSharedPreferenceChanged()
+        + setTheme()
+        + showAddDialog()
+        # onCreate()
+        - setupSharedPreferences()
+        - switchLanguage()
+        - switchTheme()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.MaterialsActivity.AddDialogFragment {
+        + onCreateView()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.MaterialsAdapter {
+        ~ fragmentManager : FragmentManager
+        {static} - mValues : List<Material>
+        + MaterialsAdapter()
+        + addItem()
+        + deleteItem()
+        + getItemCount()
+        + onBindViewHolder()
+        + onCreateViewHolder()
+        + showEditDialog()
+        - editItem()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.MaterialsAdapter.EditDialogFragment {
+        - position : int
+        + onCreateView()
+        - EditDialogFragment()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.MaterialsAdapter.ViewHolder {
+        + mContentView : TextView
+        + mDelete : ImageView
+        + mDetails : TextView
+        + mView : View
+        + ViewHolder()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.Results {
+        - name : String
+        + getName()
+        {static} ~ createResultsList()
+        - Results()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.ResultsAdapter {
+        {static} - ITEM_TYPE_CHARTS : int
+        {static} - ITEM_TYPE_RESULTS : int
+        - chartList : List<Chart>
+        - context : Context
+        - list : ArrayList
+        - resultsList : List<Results>
+        + getItemCount()
+        + getItemViewType()
+        + onBindViewHolder()
+        + onCreateViewHolder()
+        ~ ResultsAdapter()
+        - getContext()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.ResultsAdapter.ChartsViewHolder {
+        ~ chartTextView : TextView
+        - context : Context
+        + onClick()
+        ~ ChartsViewHolder()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.ResultsAdapter.ResultsViewHolder {
+        ~ resultsTextView : TextView
+        ~ ResultsViewHolder()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.SettingsActivity {
+        + onDestroy()
+        + onSharedPreferenceChanged()
+        + setTheme()
+        # onCreate()
+        - setupSharedPreferences()
+        - switchLanguage()
+        - switchTheme()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.SettingsActivity.SettingsFragment {
+        + onCreatePreferences()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.ShareActivity {
+        # onCreate()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.SplashActivity {
+        + onCreate()
+        + setTheme()
+        + setupSharedPreferences()
+        + switchTheme()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.StressLineChartActivity {
+        + onDestroy()
+        + onSharedPreferenceChanged()
+        + setTheme()
+        # onCreate()
+        - setupSharedPreferences()
+        - switchLanguage()
+        - switchTheme()
+    }
+  }
+  
+
+  namespace com.example.bucklingcalculator {
+    class com.example.bucklingcalculator.StressLineChartActivity.CustomDataEntry {
+        ~ CustomDataEntry()
+    }
+  }
+  
+
+  com.example.bucklingcalculator.CrossSections +-down- com.example.bucklingcalculator.CrossSections.CrossSection
+  com.example.bucklingcalculator.CrossSectionsActivity .up.|> android.content.SharedPreferences.OnSharedPreferenceChangeListener
+  com.example.bucklingcalculator.CrossSectionsActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.bucklingcalculator.CrossSectionsActivity +-down- com.example.bucklingcalculator.CrossSectionsActivity.AddDialogFragment
+  com.example.bucklingcalculator.CrossSectionsActivity.AddDialogFragment -up-|> androidx.fragment.app.DialogFragment
+  com.example.bucklingcalculator.CrossSectionsAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.example.bucklingcalculator.CrossSectionsAdapter +-down- com.example.bucklingcalculator.CrossSectionsAdapter.EditDialogFragment
+  com.example.bucklingcalculator.CrossSectionsAdapter +-down- com.example.bucklingcalculator.CrossSectionsAdapter.ViewHolder
+  com.example.bucklingcalculator.CrossSectionsAdapter.EditDialogFragment -up-|> androidx.fragment.app.DialogFragment
+  com.example.bucklingcalculator.CrossSectionsAdapter.EditDialogFragment o-- com.example.bucklingcalculator.CrossSectionsAdapter : crossSectionAdapter
+  com.example.bucklingcalculator.CrossSectionsAdapter.ViewHolder -up-|> androidx.recyclerview.widget.RecyclerView.ViewHolder
+  com.example.bucklingcalculator.CrossSectionsAdapter.ViewHolder o-- com.example.bucklingcalculator.CrossSections.CrossSection : mItem
+  com.example.bucklingcalculator.ForceLineChartActivity .up.|> android.content.SharedPreferences.OnSharedPreferenceChangeListener
+  com.example.bucklingcalculator.ForceLineChartActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.bucklingcalculator.ForceLineChartActivity +-down- com.example.bucklingcalculator.ForceLineChartActivity.CustomDataEntry
+  com.example.bucklingcalculator.ForceLineChartActivity.CustomDataEntry -up-|> com.anychart.chart.common.dataentry.ValueDataEntry
+  com.example.bucklingcalculator.MainActivity .up.|> android.content.SharedPreferences.OnSharedPreferenceChangeListener
+  com.example.bucklingcalculator.MainActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.bucklingcalculator.Materials +-down- com.example.bucklingcalculator.Materials.Material
+  com.example.bucklingcalculator.MaterialsActivity .up.|> android.content.SharedPreferences.OnSharedPreferenceChangeListener
+  com.example.bucklingcalculator.MaterialsActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.bucklingcalculator.MaterialsActivity +-down- com.example.bucklingcalculator.MaterialsActivity.AddDialogFragment
+  com.example.bucklingcalculator.MaterialsActivity.AddDialogFragment -up-|> androidx.fragment.app.DialogFragment
+  com.example.bucklingcalculator.MaterialsAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.example.bucklingcalculator.MaterialsAdapter +-down- com.example.bucklingcalculator.MaterialsAdapter.EditDialogFragment
+  com.example.bucklingcalculator.MaterialsAdapter +-down- com.example.bucklingcalculator.MaterialsAdapter.ViewHolder
+  com.example.bucklingcalculator.MaterialsAdapter.EditDialogFragment -up-|> androidx.fragment.app.DialogFragment
+  com.example.bucklingcalculator.MaterialsAdapter.EditDialogFragment o-- com.example.bucklingcalculator.MaterialsAdapter : materialsAdapter
+  com.example.bucklingcalculator.MaterialsAdapter.ViewHolder -up-|> androidx.recyclerview.widget.RecyclerView.ViewHolder
+  com.example.bucklingcalculator.MaterialsAdapter.ViewHolder o-- com.example.bucklingcalculator.Materials.Material : mItem
+  com.example.bucklingcalculator.ResultsAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.example.bucklingcalculator.ResultsAdapter +-down- com.example.bucklingcalculator.ResultsAdapter.ChartsViewHolder
+  com.example.bucklingcalculator.ResultsAdapter +-down- com.example.bucklingcalculator.ResultsAdapter.ResultsViewHolder
+  com.example.bucklingcalculator.ResultsAdapter.ChartsViewHolder .up.|> android.view.View.OnClickListener
+  com.example.bucklingcalculator.ResultsAdapter.ChartsViewHolder -up-|> androidx.recyclerview.widget.RecyclerView.ViewHolder
+  com.example.bucklingcalculator.ResultsAdapter.ResultsViewHolder -up-|> androidx.recyclerview.widget.RecyclerView.ViewHolder
+  com.example.bucklingcalculator.SettingsActivity .up.|> android.content.SharedPreferences.OnSharedPreferenceChangeListener
+  com.example.bucklingcalculator.SettingsActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.bucklingcalculator.SettingsActivity +-down- com.example.bucklingcalculator.SettingsActivity.SettingsFragment
+  com.example.bucklingcalculator.SettingsActivity.SettingsFragment -up-|> androidx.preference.PreferenceFragmentCompat
+  com.example.bucklingcalculator.ShareActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.bucklingcalculator.SplashActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.bucklingcalculator.StressLineChartActivity .up.|> android.content.SharedPreferences.OnSharedPreferenceChangeListener
+  com.example.bucklingcalculator.StressLineChartActivity -up-|> androidx.appcompat.app.AppCompatActivity
+  com.example.bucklingcalculator.StressLineChartActivity +-down- com.example.bucklingcalculator.StressLineChartActivity.CustomDataEntry
+  com.example.bucklingcalculator.StressLineChartActivity.CustomDataEntry -up-|> com.anychart.chart.common.dataentry.ValueDataEntry
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

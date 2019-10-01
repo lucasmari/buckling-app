@@ -12,9 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.bucklingcalculator.MainActivity.convert;
-import static com.example.bucklingcalculator.MainActivity.results;
-
 public class ResultsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ArrayList list;
     private List<Results> resultsList;

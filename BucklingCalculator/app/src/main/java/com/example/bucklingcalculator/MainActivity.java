@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle(R.string.app_name);
         setupSharedPreferences();
 
         // Soft keyboard configuration

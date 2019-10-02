@@ -17,6 +17,7 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        setTitle(R.string.settings_option);
         setupSharedPreferences();
 
         getSupportFragmentManager()

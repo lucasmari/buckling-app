@@ -2,7 +2,10 @@
     <string name="app_name">Buckling Calculator</string>
 
     <!-- Text Views -->
-    <string name="intro_tv">This is an intro to welcome the user and explain how to use the app..</string>
+    <string name="intro_tv">What is Column Buckling?\n\nColumn Buckling is a form of
+        deformation as a result of axial-compression forces, leading to the bending of the column,
+        due to its instability. The factors which determine how or if a column will buckle
+        are: length, strength, end condition, cross section, load and eccentricity.</string>
     <string name="end_condition_tv">End condition</string>
     <string name="load_tv">Load</string>
     <string name="material_tv">Material</string>
@@ -31,7 +34,7 @@
     <!-- Materials ArrayLists Items -->
     <string name="material_1">Steel</string>
     <string name="yield_strength_1">137.9E6</string>
-    <string name="elastic_modulus_1">68.95E9</string>
+    <string name="elastic_modulus_1">82.74E9</string>
     <string name="material_2">Wood</string>
     <string name="yield_strength_2">150E6</string>
     <string name="elastic_modulus_2">90E9</string>

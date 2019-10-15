@@ -29,6 +29,7 @@ public class MaterialsActivity extends AppCompatActivity implements SharedPrefer
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_materials);
+        setTitle(R.string.materials_option);
         setupSharedPreferences();
 
         RecyclerView recyclerView = findViewById(R.id.list);
@@ -127,7 +128,7 @@ public class MaterialsActivity extends AppCompatActivity implements SharedPrefer
         DisplayMetrics dm = res.getDisplayMetrics();
         android.content.res.Configuration conf = res.getConfiguration();
 
-        if (newValue.toString().equals("Portuguese"))
+        if (newValue.toString().equals(getResources().getString(R.string.portuguese_value)))
             conf.setLocale(new Locale("pt", "BR"));
         else
             conf.setLocale(new Locale("en", "US"));

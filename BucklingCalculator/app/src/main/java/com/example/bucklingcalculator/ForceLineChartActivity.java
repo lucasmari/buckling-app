@@ -34,6 +34,7 @@ public class ForceLineChartActivity extends AppCompatActivity implements SharedP
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
+        setTitle(R.string.force_chart_title);
         setupSharedPreferences();
 
         AnyChartView anyChartView = findViewById(R.id.any_chart_view);
@@ -154,7 +155,7 @@ public class ForceLineChartActivity extends AppCompatActivity implements SharedP
         DisplayMetrics dm = res.getDisplayMetrics();
         android.content.res.Configuration conf = res.getConfiguration();
 
-        if (newValue.toString().equals("Portuguese"))
+        if (newValue.toString().equals(getResources().getString(R.string.portuguese_value)))
             conf.setLocale(new Locale("pt", "BR"));
         else
             conf.setLocale(new Locale("en", "US"));

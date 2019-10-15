@@ -29,6 +29,7 @@ public class CrossSectionsActivity extends AppCompatActivity implements SharedPr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cross_sections);
+        setTitle(R.string.cross_sections_option);
         setupSharedPreferences();
 
         RecyclerView recyclerView = findViewById(R.id.list);
@@ -131,7 +132,7 @@ public class CrossSectionsActivity extends AppCompatActivity implements SharedPr
         DisplayMetrics dm = res.getDisplayMetrics();
         android.content.res.Configuration conf = res.getConfiguration();
 
-        if (newValue.toString().equals("Portuguese"))
+        if (newValue.toString().equals(getResources().getString(R.string.portuguese_value)))
             conf.setLocale(new Locale("pt", "BR"));
         else
             conf.setLocale(new Locale("en", "US"));

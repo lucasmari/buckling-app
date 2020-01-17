@@ -11,7 +11,7 @@ public class Results {
 
     private String name;
 
-    private Results(String name) {
+    public Results(String name) {
         this.name = name;
     }
 

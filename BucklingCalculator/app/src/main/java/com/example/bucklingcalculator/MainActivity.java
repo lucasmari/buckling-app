@@ -489,7 +489,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         list.add(resultsList.get(0));
         list.add(chartList.get(0));
         list.add(chartList.get(1));
-        final ResultsAdapter resultsAdapter = new ResultsAdapter(this, list, resultsList,
+        final ResultsAdapter resultsAdapter = new ResultsAdapter    (this, list, resultsList,
                 chartList);
 
         recyclerView.setHasFixedSize(true);

@@ -1,4 +1,4 @@
-package com.example.bucklingcalculator;
+package com.example.bucklingcalculator.activities;
 
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -16,11 +16,14 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bucklingcalculator.R;
+import com.example.bucklingcalculator.adapters.CrossSectionsAdapter;
+import com.example.bucklingcalculator.models.CrossSections;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Locale;
 
-import static com.example.bucklingcalculator.MainActivity.crossSections;
+import static com.example.bucklingcalculator.activities.MainActivity.crossSections;
 
 public class CrossSectionsActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static CrossSectionsAdapter crossSectionsAdapter;
@@ -60,7 +63,7 @@ public class CrossSectionsActivity extends AppCompatActivity implements SharedPr
                 crossSections[2].add(editText3.getText().toString());
                 crossSections[3].add(editText4.getText().toString());
                 crossSections[4].add(editText5.getText().toString());
-                crossSectionsAdapter.addItem(CrossSections.createCrossSection(crossSections[0].size()-1),
+                crossSectionsAdapter.addItem(CrossSections.addCrossSection(crossSections[0].size()-1),
                         crossSections[0].size()-1);
                 AddDialogFragment.this.dismiss();
             });
@@ -81,9 +84,7 @@ public class CrossSectionsActivity extends AppCompatActivity implements SharedPr
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
-        switchTheme(sharedPreferences.getBoolean(getString(R.string.switch_theme_key), false));
-        switchLanguage(sharedPreferences.getString(getString(R.string.drop_down_language_key),
-                getResources().getString(R.string.english_value)));
+        /*switchUnit(sharedPreferences.getString(getString(R.string.drop_down_units_key), "SI"));*/
     }
 
     @Override
@@ -98,11 +99,10 @@ public class CrossSectionsActivity extends AppCompatActivity implements SharedPr
         if (key.equals(getString(R.string.switch_theme_key))) {
             switchTheme(sharedPreferences.getBoolean(key, false));
             recreate();
-        } else if (key.equals(getString(R.string.drop_down_language_key))) {
-            switchLanguage(sharedPreferences.getString(key,
-                    getResources().getString(R.string.english_value)));
+        } /*else if (key.equals(getString(R.string.drop_down_units_key))) {
+            switchUnit(sharedPreferences.getString(key, "SI"));
             recreate();
-        }
+        }*/
     }
 
     @Override
@@ -123,21 +123,5 @@ public class CrossSectionsActivity extends AppCompatActivity implements SharedPr
         } else {
             this.setTheme(R.style.AppThemeLight);
         }
-    }
-
-    private void switchLanguage(Object newValue) {
-        Resources res = this.getResources();
-
-        // Change locale settings in the app.
-        DisplayMetrics dm = res.getDisplayMetrics();
-        android.content.res.Configuration conf = res.getConfiguration();
-
-        if (newValue.toString().equals(getResources().getString(R.string.portuguese_value)))
-            conf.setLocale(new Locale("pt", "BR"));
-        else
-            conf.setLocale(new Locale("en", "US"));
-
-        // Use conf.locale = new Locale(...) if targeting lower versions
-        res.updateConfiguration(conf, dm);
     }
 }

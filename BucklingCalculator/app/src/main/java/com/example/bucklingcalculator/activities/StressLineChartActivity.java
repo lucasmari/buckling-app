@@ -1,9 +1,7 @@
-package com.example.bucklingcalculator;
+package com.example.bucklingcalculator.activities;
 
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
@@ -20,27 +18,28 @@ import com.anychart.enums.Anchor;
 import com.anychart.enums.MarkerType;
 import com.anychart.enums.TooltipPositionMode;
 import com.anychart.graphics.vector.Stroke;
+import com.example.bucklingcalculator.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-import static com.example.bucklingcalculator.MainActivity.criticalForceByLength;
-import static com.example.bucklingcalculator.MainActivity.length;
+import static com.example.bucklingcalculator.activities.MainActivity.criticalStressByLength;
+import static com.example.bucklingcalculator.activities.MainActivity.length;
 
-public class ForceLineChartActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class StressLineChartActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+
+    private Cartesian cartesian;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
-        setTitle(R.string.force_chart_title);
-        setupSharedPreferences();
+        setTitle(R.string.stress_chart_title);
 
         AnyChartView anyChartView = findViewById(R.id.any_chart_view);
         anyChartView.setProgressBar(findViewById(R.id.progress_bar));
 
-        Cartesian cartesian = AnyChart.line();
+        cartesian = AnyChart.line();
 
         cartesian.animation(true);
 
@@ -54,17 +53,17 @@ public class ForceLineChartActivity extends AppCompatActivity implements SharedP
 
         cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
 
-        cartesian.title(getString(R.string.force_line_chart));
+        cartesian.title(getString(R.string.stress_line_chart));
 
-        cartesian.yAxis(0).title(getString(R.string.force_axis));
-        cartesian.xAxis(0).title(getString(R.string.length_axis));
+        cartesian.yAxis(0).title(getString(R.string.stress_axis_si));
+        cartesian.xAxis(0).title(getString(R.string.length_axis_si));
         cartesian.xAxis(0).labels().padding(5d, 5d, 5d, 5d);
 
         List<DataEntry> seriesData = new ArrayList<>();
         int j = 0;
         for (double i = 0; i < length; i += 0.1) {
             seriesData.add(new CustomDataEntry(String.valueOf(i),
-                    criticalForceByLength.get(j)));
+                    criticalStressByLength.get(j)));
             j++;
         }
 
@@ -73,7 +72,7 @@ public class ForceLineChartActivity extends AppCompatActivity implements SharedP
         Mapping series1Mapping = set.mapAs("{ x: 'x', value: 'value' }");
 
         Line series1 = cartesian.line(series1Mapping);
-        series1.name(getString(R.string.force_curve));
+        series1.name(getString(R.string.stress_curve));
         series1.hovered().markers().enabled(true);
         series1.hovered().markers()
                 .type(MarkerType.CIRCLE)
@@ -89,6 +88,8 @@ public class ForceLineChartActivity extends AppCompatActivity implements SharedP
         cartesian.legend().padding(0d, 0d, 10d, 0d);
 
         anyChartView.setChart(cartesian);
+
+        setupSharedPreferences();
     }
 
     private class CustomDataEntry extends ValueDataEntry {
@@ -104,9 +105,7 @@ public class ForceLineChartActivity extends AppCompatActivity implements SharedP
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
-        switchTheme(sharedPreferences.getBoolean(getString(R.string.switch_theme_key), false));
-        switchLanguage(sharedPreferences.getString(getString(R.string.drop_down_language_key),
-                getResources().getString(R.string.english_value)));
+        switchUnit(sharedPreferences.getString(getString(R.string.drop_down_units_key), "SI"));
     }
 
     @Override
@@ -121,9 +120,8 @@ public class ForceLineChartActivity extends AppCompatActivity implements SharedP
         if (key.equals(getString(R.string.switch_theme_key))) {
             switchTheme(sharedPreferences.getBoolean(key, false));
             recreate();
-        } else if (key.equals(getString(R.string.drop_down_language_key))) {
-            switchLanguage(sharedPreferences.getString(key,
-                    getResources().getString(R.string.english_value)));
+        } else if (key.equals(getString(R.string.drop_down_units_key))) {
+            switchUnit(sharedPreferences.getString(key, "SI"));
             recreate();
         }
     }
@@ -148,19 +146,14 @@ public class ForceLineChartActivity extends AppCompatActivity implements SharedP
         }
     }
 
-    private void switchLanguage(Object newValue) {
-        Resources res = this.getResources();
-
-        // Change locale settings in the app.
-        DisplayMetrics dm = res.getDisplayMetrics();
-        android.content.res.Configuration conf = res.getConfiguration();
-
-        if (newValue.toString().equals(getResources().getString(R.string.portuguese_value)))
-            conf.setLocale(new Locale("pt", "BR"));
-        else
-            conf.setLocale(new Locale("en", "US"));
-
-        // Use conf.locale = new Locale(...) if targeting lower versions
-        res.updateConfiguration(conf, dm);
+    private void switchUnit(String newValue) {
+        if (newValue.equals(getResources().getString(R.string.us_value))) {
+            cartesian.yAxis(0).title(getString(R.string.stress_axis_us));
+            cartesian.xAxis(0).title(getString(R.string.length_axis_us));
+        }
+        else {
+            cartesian.yAxis(0).title(getString(R.string.stress_axis_si));
+            cartesian.xAxis(0).title(getString(R.string.length_axis_si));
+        }
     }
 }

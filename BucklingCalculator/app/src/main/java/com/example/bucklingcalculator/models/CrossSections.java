@@ -1,10 +1,10 @@
-package com.example.bucklingcalculator;
+package com.example.bucklingcalculator.models;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.bucklingcalculator.MainActivity.crossSections;
-import static com.example.bucklingcalculator.MainActivity.crossSectionsProperties;
+import static com.example.bucklingcalculator.activities.MainActivity.crossSections;
+import static com.example.bucklingcalculator.activities.MainActivity.crossSectionsProperties;
 
 public class CrossSections {
 
@@ -12,7 +12,7 @@ public class CrossSections {
 
     static  {
         for (int i = 0; i < crossSections[0].size(); i++) {
-            addItem(createCrossSection(i));
+            addItem(addCrossSection(i));
         }
     }
 
@@ -20,13 +20,10 @@ public class CrossSections {
         ITEMS.add(item);
     }
 
-    public static CrossSection createCrossSection(int position) {
+    public static CrossSection addCrossSection(int position) {
         return new CrossSection(position, crossSections[0].get(position).toString(), makeDetails(position));
     }
 
-    public static CrossSection editCrossSection(int position) {
-        return new CrossSection(position, crossSections[0].get(position).toString(), makeDetails(position));
-    }
 
     private static String makeDetails(int position) {
         StringBuilder builder = new StringBuilder();

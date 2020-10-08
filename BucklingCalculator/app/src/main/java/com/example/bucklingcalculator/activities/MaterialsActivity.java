@@ -1,9 +1,7 @@
-package com.example.bucklingcalculator;
+package com.example.bucklingcalculator.activities;
 
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +14,12 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bucklingcalculator.R;
+import com.example.bucklingcalculator.adapters.MaterialsAdapter;
+import com.example.bucklingcalculator.models.Materials;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.Locale;
-
-import static com.example.bucklingcalculator.MainActivity.materials;
+import static com.example.bucklingcalculator.activities.MainActivity.materials;
 
 public class MaterialsActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static MaterialsAdapter materialsAdapter;
@@ -48,18 +47,21 @@ public class MaterialsActivity extends AppCompatActivity implements SharedPrefer
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.dialog_add_material, container, false);
+
             EditText editText1 = view.findViewById(R.id.dialogEditText1);
             EditText editText2 = view.findViewById(R.id.dialogEditText2);
             EditText editText3 = view.findViewById(R.id.dialogEditText3);
+
             Button saveButton = view.findViewById(R.id.dialogSaveButton);
             saveButton.setOnClickListener(v -> {
                 materials[0].add(editText1.getText().toString());
                 materials[1].add(editText2.getText().toString());
                 materials[2].add(editText3.getText().toString());
-                materialsAdapter.addItem(Materials.createMaterial(materials[0].size()-1),
+                materialsAdapter.addItem(Materials.addMaterial(materials[0].size()-1),
                         materials[0].size()-1);
                 AddDialogFragment.this.dismiss();
             });
+
             Button cancelButton = view.findViewById(R.id.dialogCancelButton);
             cancelButton.setOnClickListener(v -> AddDialogFragment.this.getDialog().cancel());
 
@@ -77,9 +79,7 @@ public class MaterialsActivity extends AppCompatActivity implements SharedPrefer
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
-        switchTheme(sharedPreferences.getBoolean(getString(R.string.switch_theme_key), false));
-        switchLanguage(sharedPreferences.getString(getString(R.string.drop_down_language_key),
-                getResources().getString(R.string.english_value)));
+        /*switchUnit(sharedPreferences.getString(getString(R.string.drop_down_units_key), "SI"));*/
     }
 
     @Override
@@ -94,11 +94,10 @@ public class MaterialsActivity extends AppCompatActivity implements SharedPrefer
         if (key.equals(getString(R.string.switch_theme_key))) {
             switchTheme(sharedPreferences.getBoolean(key, false));
             recreate();
-        } else if (key.equals(getString(R.string.drop_down_language_key))) {
-            switchLanguage(sharedPreferences.getString(key,
-                    getResources().getString(R.string.english_value)));
+        } /*else if (key.equals(getString(R.string.drop_down_units_key))) {
+            switchUnit(sharedPreferences.getString(key, "SI"));
             recreate();
-        }
+        }*/
     }
 
     @Override
@@ -121,19 +120,18 @@ public class MaterialsActivity extends AppCompatActivity implements SharedPrefer
         }
     }
 
-    private void switchLanguage(Object newValue) {
-        Resources res = this.getResources();
-
-        // Change locale settings in the app.
-        DisplayMetrics dm = res.getDisplayMetrics();
-        android.content.res.Configuration conf = res.getConfiguration();
-
-        if (newValue.toString().equals(getResources().getString(R.string.portuguese_value)))
-            conf.setLocale(new Locale("pt", "BR"));
-        else
-            conf.setLocale(new Locale("en", "US"));
-
-        // Use conf.locale = new Locale(...) if targeting lower versions
-        res.updateConfiguration(conf, dm);
-    }
+    /*private void switchUnit(String newValue) {
+        if (newValue.equals(getResources().getString(R.string.us_value))) {
+            editText1.setSuffix(" in");
+            editText2.setSuffix(" lbf");
+            editText3.setSuffix(" in");
+            usSystem = true;
+        }
+        else {
+            editText1.setSuffix(" m");
+            editText2.setSuffix(" N");
+            editText3.setSuffix(" m");
+            usSystem = false;
+        }
+    }*/
 }

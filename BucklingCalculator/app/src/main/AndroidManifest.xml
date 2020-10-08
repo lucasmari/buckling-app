@@ -11,39 +11,46 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeLight"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SplashActivity">
+
+        <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+
+        <activity android:name=".activities.MainActivity" />
+
         <activity
-            android:name=".SettingsActivity"
+            android:name=".activities.SettingsActivity"
             android:label="@string/settings_option" />
-        <activity android:name=".ShareActivity">
+
+        <activity android:name=".activities.ShareActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".MaterialsActivity"
+            android:name=".activities.MaterialsActivity"
             android:label="@string/materials_option" />
+
         <activity
-            android:name=".CrossSectionsActivity"
+            android:name=".activities.CrossSectionsActivity"
             android:label="@string/cross_sections_option" />
+
         <activity
-            android:name=".StressLineChartActivity"
+            android:name=".activities.StressLineChartActivity"
             android:label="@string/stress_chart_title" />
+
         <activity
-            android:name=".ForceLineChartActivity"
+            android:name=".activities.ForceLineChartActivity"
             android:label="@string/force_chart_title" />
-        <activity android:name=".Chart" />
+
+        <activity android:name=".models.Chart" />
     </application>
 
     <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

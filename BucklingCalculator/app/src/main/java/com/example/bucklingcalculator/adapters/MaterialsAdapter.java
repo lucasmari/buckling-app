@@ -1,4 +1,4 @@
-package com.example.bucklingcalculator;
+package com.example.bucklingcalculator.adapters;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,17 +13,19 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bucklingcalculator.R;
+import com.example.bucklingcalculator.models.Materials;
+
 import java.util.List;
 
-import static com.example.bucklingcalculator.MainActivity.crossSections;
+import static com.example.bucklingcalculator.activities.MainActivity.materials;
 
-public class CrossSectionsAdapter extends RecyclerView.Adapter<CrossSectionsAdapter.ViewHolder> {
+public class MaterialsAdapter extends RecyclerView.Adapter<MaterialsAdapter.ViewHolder> {
     FragmentManager fragmentManager;
 
-    private static List<CrossSections.CrossSection> mValues;
+    private static List<Materials.Material> mValues;
 
-    public CrossSectionsAdapter(List<CrossSections.CrossSection> items,
-                                FragmentManager fragmentManager) {
+    public MaterialsAdapter(List<Materials.Material> items, FragmentManager fragmentManager) {
         mValues = items;
         this.fragmentManager = fragmentManager;
     }
@@ -45,8 +47,8 @@ public class CrossSectionsAdapter extends RecyclerView.Adapter<CrossSectionsAdap
 
         holder.mDelete.setOnClickListener(v -> {
             deleteItem(position);
-            for(int i = 0; i < crossSections.length; i++) {
-                crossSections[i].remove(position);
+            for(int i = 0; i < materials.length; i++) {
+                materials[i].remove(position);
             }
         });
     }
@@ -61,7 +63,7 @@ public class CrossSectionsAdapter extends RecyclerView.Adapter<CrossSectionsAdap
         public final TextView mContentView;
         public final TextView mDetails;
         public final ImageView mDelete;
-        public CrossSections.CrossSection mItem;
+        public Materials.Material mItem;
 
         public ViewHolder(View view) {
             super(view);
@@ -72,12 +74,12 @@ public class CrossSectionsAdapter extends RecyclerView.Adapter<CrossSectionsAdap
         }
     }
 
-    public void addItem(CrossSections.CrossSection item, int index) {
+    public void addItem(Materials.Material item, int index) {
         mValues.add(index, item);
         notifyDataSetChanged();
     }
 
-    private void editItem(CrossSections.CrossSection item, int index) {
+    private void editItem(Materials.Material item, int index) {
         mValues.set(index, item);
         notifyDataSetChanged();
     }
@@ -90,36 +92,31 @@ public class CrossSectionsAdapter extends RecyclerView.Adapter<CrossSectionsAdap
 
     public static class EditDialogFragment extends DialogFragment {
         private int position;
-        CrossSectionsAdapter crossSectionAdapter;
+        MaterialsAdapter materialsAdapter;
 
-        private EditDialogFragment(CrossSectionsAdapter crossSectionAdapter, int position) {
+        private EditDialogFragment(MaterialsAdapter materialsAdapter, int position) {
             super();
-            this.crossSectionAdapter = crossSectionAdapter;
+            this.materialsAdapter = materialsAdapter;
             this.position = position;
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.dialog_edit_cross_section, container, false);
+            View view = inflater.inflate(R.layout.dialog_edit_material, container, false);
             EditText editText1 = view.findViewById(R.id.dialogEditText1);
-            editText1.setText(crossSections[0].get(position).toString());
+            editText1.setText(materials[0].get(position));
             EditText editText2 = view.findViewById(R.id.dialogEditText2);
-            editText2.setText(crossSections[1].get(position).toString());
+            editText2.setText(materials[1].get(position));
             EditText editText3 = view.findViewById(R.id.dialogEditText3);
-            editText3.setText(crossSections[2].get(position).toString());
-            EditText editText4 = view.findViewById(R.id.dialogEditText4);
-            editText4.setText(crossSections[3].get(position).toString());
-            EditText editText5 = view.findViewById(R.id.dialogEditText5);
-            editText5.setText(crossSections[4].get(position).toString());
+            editText3.setText(materials[2].get(position));
             Button saveButton = view.findViewById(R.id.dialogSaveButton);
             saveButton.setOnClickListener(v -> {
-                crossSections[0].set(position, editText1.getText().toString());
-                crossSections[1].set(position, editText2.getText().toString());
-                crossSections[2].set(position, editText3.getText().toString());
-                crossSections[3].set(position, editText4.getText().toString());
-                crossSections[4].set(position, editText5.getText().toString());
-                crossSectionAdapter.editItem(CrossSections.editCrossSection(position),
+                materials[0].set(position, editText1.getText().toString());
+                materials[1].set(position, editText2.getText().toString());
+                materials[2].set(position, editText3.getText().toString());
+                materialsAdapter.editItem(Materials.addMaterial(
+                        position),
                         position);
                 EditDialogFragment.this.dismiss();
             });

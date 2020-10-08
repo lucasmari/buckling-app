@@ -9,13 +9,13 @@ title __APP's Class Diagram__\n
   
 
   namespace com.example.bucklingcalculator {
-    class com.example.bucklingcalculator.Chart {
+    class com.example.bucklingcalculator.models.Chart {
     }
   }
   
 
   namespace com.example.bucklingcalculator {
-    class com.example.bucklingcalculator.CrossSections {
+    class com.example.bucklingcalculator.models.CrossSections {
     }
   }
   
@@ -27,7 +27,7 @@ title __APP's Class Diagram__\n
   
 
   namespace com.example.bucklingcalculator {
-    class com.example.bucklingcalculator.CrossSectionsAdapter {
+    class com.example.bucklingcalculator.adapters.CrossSectionsAdapter {
     }
   }
   
@@ -45,7 +45,7 @@ title __APP's Class Diagram__\n
   
 
   namespace com.example.bucklingcalculator {
-    class com.example.bucklingcalculator.Materials {
+    class com.example.bucklingcalculator.models.Materials {
     }
   }
   
@@ -63,7 +63,7 @@ title __APP's Class Diagram__\n
   
 
   namespace com.example.bucklingcalculator {
-    class com.example.bucklingcalculator.Results {
+    class com.example.bucklingcalculator.models.Results {
     }
   }
   
@@ -100,7 +100,7 @@ title __APP's Class Diagram__\n
 
   com.example.bucklingcalculator.CrossSectionsActivity .up.|> android.content.SharedPreferences.OnSharedPreferenceChangeListener
   com.example.bucklingcalculator.CrossSectionsActivity -up-|> androidx.appcompat.app.AppCompatActivity
-  com.example.bucklingcalculator.CrossSectionsAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.example.bucklingcalculator.adapters.CrossSectionsAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
   com.example.bucklingcalculator.ForceLineChartActivity .up.|> android.content.SharedPreferences.OnSharedPreferenceChangeListener
   com.example.bucklingcalculator.ForceLineChartActivity -up-|> androidx.appcompat.app.AppCompatActivity
   com.example.bucklingcalculator.MainActivity .up.|> android.content.SharedPreferences.OnSharedPreferenceChangeListener

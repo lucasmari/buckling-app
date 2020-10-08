@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppThemeLight" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->

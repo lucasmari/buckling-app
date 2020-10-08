@@ -1,4 +1,4 @@
-package com.example.bucklingcalculator;
+package com.example.bucklingcalculator.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.bucklingcalculator.R;
+import com.example.bucklingcalculator.models.Chart;
+import com.example.bucklingcalculator.models.Results;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +59,7 @@ public class ResultsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    ResultsAdapter(Context context, ArrayList list, List<Results> resultsList,
+    public ResultsAdapter(Context context, ArrayList list, List<Results> resultsList,
                    List<Chart> chartList) {
         this.list = list;
         this.resultsList = resultsList;
@@ -70,10 +74,6 @@ public class ResultsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         } else {
             return ITEM_TYPE_RESULTS;
         }
-    }
-
-    private Context getContext() {
-        return context;
     }
 
     @Override

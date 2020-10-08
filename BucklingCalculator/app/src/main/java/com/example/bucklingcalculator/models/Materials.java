@@ -1,10 +1,10 @@
-package com.example.bucklingcalculator;
+package com.example.bucklingcalculator.models;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.bucklingcalculator.MainActivity.materials;
-import static com.example.bucklingcalculator.MainActivity.materialsProperties;
+import static com.example.bucklingcalculator.activities.MainActivity.materials;
+import static com.example.bucklingcalculator.activities.MainActivity.materialsProperties;
 
 public class Materials {
 
@@ -12,7 +12,7 @@ public class Materials {
 
     static  {
         for (int i = 0; i < materials[0].size(); i++) {
-            addItem(createMaterial(i));
+            addItem(addMaterial(i));
         }
     }
 
@@ -20,18 +20,14 @@ public class Materials {
         ITEMS.add(item);
     }
 
-    public static Material createMaterial(int position) {
-        return new Material(position, materials[0].get(position).toString(), makeDetails(position));
-    }
-
-    public static Material editMaterial(int position) {
-        return new Material(position, materials[0].get(position).toString(), makeDetails(position));
+    public static Material addMaterial(int position) {
+        return new Material(position, materials[0].get(position), makeDetails(position));
     }
 
     private static String makeDetails(int position) {
         StringBuilder builder = new StringBuilder();
-        builder.append(materialsProperties.get(0) + ": " + materials[1].get(position).toString());
-        builder.append("\n" + materialsProperties.get(1) + ": " + materials[2].get(position).toString());
+        builder.append(materialsProperties.get(0) + ": " + materials[1].get(position));
+        builder.append("\n" + materialsProperties.get(1) + ": " + materials[2].get(position));
         return builder.toString();
     }
 

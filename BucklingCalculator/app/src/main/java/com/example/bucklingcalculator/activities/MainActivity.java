@@ -1,14 +1,12 @@
-package com.example.bucklingcalculator;
+package com.example.bucklingcalculator.activities;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.transition.TransitionManager;
-import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,15 +32,19 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bucklingcalculator.R;
+import com.example.bucklingcalculator.adapters.ResultsAdapter;
+import com.example.bucklingcalculator.models.Chart;
+import com.example.bucklingcalculator.models.Results;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.opencsv.CSVWriter;
+import com.tobiasschuerg.prefixsuffix.PrefixSuffixEditText;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     // End Condition variable
@@ -59,9 +61,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private double inertiaMoment;
 
     // EditTexts variables
-    public static double length;
-    private double load;
-    private double eccentricity;
+    public static double length = 0;
+    private double load = 0;
+    private double eccentricity = 0;
 
     // Results variables
     private double criticalStress;
@@ -69,10 +71,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private double safetyFactor;
 
     // Material/Cross Section ArrayLists
-    public static ArrayList[] materials = new ArrayList[3];
-    public static ArrayList materialsProperties = new ArrayList();
-    public static ArrayList[] crossSections = new ArrayList[5];
-    public static ArrayList crossSectionsProperties = new ArrayList();
+    public static ArrayList<String>[] materials = new ArrayList[3];
+    public static ArrayList<String> materialsProperties = new ArrayList();
+    public static ArrayList<String>[] crossSections = new ArrayList[5];
+    public static ArrayList<String> crossSectionsProperties = new ArrayList();
 
     // Results ArrayList
     public static ArrayList<Double> results = new ArrayList<>();
@@ -81,7 +83,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     private ImageView columnImageView;
     private CheckBox checkBox;
-    private EditText editText3;
+    private PrefixSuffixEditText editText1;
+    private PrefixSuffixEditText editText2;
+    private PrefixSuffixEditText editText3;
     private RecyclerView recyclerView;
     private Spinner spinner1;
     private Spinner spinner2;
@@ -96,13 +100,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     private String fileName = "";
     private boolean theme;
+    private boolean usSystem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle(R.string.app_name);
-        setupSharedPreferences();
 
         // Soft keyboard configuration
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
@@ -113,13 +117,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         spinner1 = findViewById(R.id.spinner1);
         spinner2 = findViewById(R.id.spinner2);
         spinner3 = findViewById(R.id.spinner3);
-        EditText editText1 = findViewById(R.id.editText1);
-        EditText editText2 = findViewById(R.id.editText2);
+        editText1 = findViewById(R.id.editText1);
+        editText1.setSuffix(" m");
+        editText2 = findViewById(R.id.editText2);
+        editText2.setSuffix(" N");
         checkBox = findViewById(R.id.checkBox);
         editText3 = findViewById(R.id.editText3);
+        editText3.setSuffix(" m");
+
         Button calculateButton = findViewById(R.id.calculateButton);
         Button clearButton = findViewById(R.id.clearButton);
-//        TextView introTextView = findViewById(R.id.introTextView);
         recyclerView = findViewById(R.id.resultsView);
 
         // Layouts constraints
@@ -199,8 +206,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                yieldStrength = Double.valueOf(materials[1].get(position).toString());
-                elasticModulus = Double.valueOf(materials[2].get(position).toString());
+                yieldStrength = Double.parseDouble(materials[1].get(position).toString());
+                elasticModulus = Double.parseDouble(materials[2].get(position).toString());
             }
 
             @Override
@@ -213,10 +220,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                area = Double.valueOf(crossSections[1].get(position).toString());
-                centroidalDistance = Double.valueOf(crossSections[2].get(position).toString());
-                gyrationRadius = Double.valueOf(crossSections[3].get(position).toString());
-                inertiaMoment = Double.valueOf(crossSections[4].get(position).toString());
+                area = Double.parseDouble(crossSections[1].get(position).toString());
+                centroidalDistance = Double.parseDouble(crossSections[2].get(position).toString());
+                gyrationRadius = Double.parseDouble(crossSections[3].get(position).toString());
+                inertiaMoment = Double.parseDouble(crossSections[4].get(position).toString());
             }
 
             @Override
@@ -235,9 +242,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
             if (validInputs(editText1, editText2, editText3)) {
 
-                length = Double.valueOf(editText1.getText().toString());
-                load = Double.valueOf(editText2.getText().toString());
-                eccentricity = Double.valueOf(editText3.getText().toString());
+                length = Double.parseDouble(editText1.getText().toString());
+                load = Double.parseDouble(editText2.getText().toString());
+                if (checkBox.isChecked()) eccentricity = Double.parseDouble(editText3.getText().toString());
 
                 setResults();
 
@@ -250,13 +257,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         clearButton.setOnClickListener(v -> {
             TransitionManager.beginDelayedTransition(layout);
             constraintSet1.applyTo(layout);
-            editText1.setText(getString(R.string.value_et));
             editText1.clearFocus();
-            editText2.setText(getString(R.string.value_et));
+            editText1.setText("");
             editText2.clearFocus();
+            editText2.setText("");
             checkBox.setChecked(false);
-            editText3.setText(getString(R.string.value_et));
             editText3.clearFocus();
+            editText3.setText("");
         });
 
         // Checkbox listener
@@ -266,6 +273,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             else
                 editText3.setEnabled(false);
         });
+
+        setupSharedPreferences();
     }
 
     @Override
@@ -409,19 +418,17 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     public boolean validInputs(EditText editText1, EditText editText2, EditText editText3) {
-        if (editText1.getText().toString().equals("0") || editText1.getText().toString().equals(
-                "")) {
+        if (editText1.getText().toString().equals("")) {
             Toast.makeText(getApplicationContext(), "Length not set!", Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if (editText2.getText().toString().equals("0") || editText2.getText().toString().equals(
-                "")) {
+        if (editText2.getText().toString().equals("")) {
             Toast.makeText(getApplicationContext(), "Load not set!", Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if (editText3.getText().toString().equals("")) {
+        if (editText3.getText().toString().equals("") && checkBox.isChecked()) {
             Toast.makeText(getApplicationContext(), "Eccentricity not set!", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -430,7 +437,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     public double calculateCriticalStress() {
-        if (checkBox.isChecked() && !editText3.getText().toString().equals("0")) {
+        if (checkBox.isChecked() && !editText3.getText().toString().equals("")) {
             criticalStress =
                     (load / area) * (1 + ((eccentricity * centroidalDistance) / Math.pow(gyrationRadius, 2)) * Math.acos(((effectiveLengthFactor * length) / (2 * gyrationRadius)) * Math.sqrt(load / (area * elasticModulus))));
 
@@ -483,13 +490,17 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         results.add(1, calculateCriticalForce());
         results.add(2, calculateSafetyFactor());
 
-        List<Results> resultsList = Results.createResultsList(getResources());
+        List<Results> resultsList;
+        if (usSystem) resultsList = Results.createResultsList(getResources(),
+                getString(R.string.stress_unit_us), getString(R.string.force_unit_us));
+        else resultsList = Results.createResultsList(getResources(),
+                getString(R.string.stress_unit_si), getString(R.string.force_unit_si));
         List<Chart> chartList = Chart.createChartList(getResources());
         ArrayList list = new ArrayList();
         list.add(resultsList.get(0));
         list.add(chartList.get(0));
         list.add(chartList.get(1));
-        final ResultsAdapter resultsAdapter = new ResultsAdapter    (this, list, resultsList,
+        final ResultsAdapter resultsAdapter = new ResultsAdapter(this, list, resultsList,
                 chartList);
 
         recyclerView.setHasFixedSize(true);
@@ -518,10 +529,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         if (index >= 0 && index < PREFIX_ARRAY.length) {
             // If a prefix exists use it to create the correct string
-            return String.format("%." + dp + "f%s", val, PREFIX_ARRAY[index]);
+            return String.format("%." + dp + "f %s", val, PREFIX_ARRAY[index]);
         } else {
             // If no prefix exists just make a string of the form 000e000
-            return String.format("%." + dp + "fe%d", val, count * 3);
+            return String.format("%." + dp + "fe %d", val, count * 3);
         }
     }
 
@@ -617,9 +628,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
-        switchTheme(sharedPreferences.getBoolean(getString(R.string.switch_theme_key), false));
-        switchLanguage(sharedPreferences.getString(getString(R.string.drop_down_language_key),
-                getResources().getString(R.string.english_value)));
+        switchUnit(sharedPreferences.getString(getString(R.string.drop_down_units_key), "SI"));
     }
 
     @Override
@@ -634,9 +643,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         if (key.equals(getString(R.string.switch_theme_key))) {
             switchTheme(sharedPreferences.getBoolean(key, false));
             recreate();
-        } else if (key.equals(getString(R.string.drop_down_language_key))) {
-            switchLanguage(sharedPreferences.getString(key,
-                    getResources().getString(R.string.english_value)));
+        } else if (key.equals(getString(R.string.drop_down_units_key))) {
+            switchUnit(sharedPreferences.getString(key, "SI"));
             recreate();
         }
     }
@@ -661,19 +669,18 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }
     }
 
-    private void switchLanguage(Object newValue) {
-        Resources res = this.getResources();
-
-        // Change locale settings in the app.
-        DisplayMetrics dm = res.getDisplayMetrics();
-        android.content.res.Configuration conf = res.getConfiguration();
-
-        if (newValue.toString().equals(getResources().getString(R.string.portuguese_value)))
-            conf.setLocale(new Locale("pt", "BR"));
-        else
-            conf.setLocale(new Locale("en", "US"));
-
-        // Use conf.locale = new Locale(...) if targeting lower versions
-        res.updateConfiguration(conf, dm);
+    private void switchUnit(String newValue) {
+        if (newValue.equals(getResources().getString(R.string.us_value))) {
+            editText1.setSuffix(" in");
+            editText2.setSuffix(" lbf");
+            editText3.setSuffix(" in");
+            usSystem = true;
+        }
+        else {
+            editText1.setSuffix(" m");
+            editText2.setSuffix(" N");
+            editText3.setSuffix(" m");
+            usSystem = false;
+        }
     }
 }

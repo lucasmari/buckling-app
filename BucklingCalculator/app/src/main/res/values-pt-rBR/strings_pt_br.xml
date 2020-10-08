@@ -23,14 +23,13 @@
     <string name="calculate_button">CALCULAR</string>
 
     <!-- EditTexts -->
-    <string name="value_et">0</string>
-    <string name="hint_et"> </string>
+    <string name="hint_et">0</string>
 
     <!-- Spinner Items 1 | End Condition -->
-    <string name="end_condition_1">Pinned-Pinned</string>
-    <string name="end_condition_2">Fixed-Fixed</string>
-    <string name="end_condition_3">Fixed-Pinned</string>
-    <string name="end_condition_4">Fixed-Free</string>
+    <string name="end_condition_1">Fixado-Fixado</string>
+    <string name="end_condition_2">Engastado-Engastado</string>
+    <string name="end_condition_3">Engastado-Fixado</string>
+    <string name="end_condition_4">Engastado-Livre</string>
 
     <!-- Materials ArrayLists Items -->
     <string name="material_1">Aço</string>
@@ -64,8 +63,8 @@
     <string name="safety_factor">Fator de segurança</string>
     <string name="stress_unit_si">Pa</string>
     <string name="force_unit_si">N</string>
-    <string name="stress_unit_us"></string>
-    <string name="force_unit_us"></string>
+    <string name="stress_unit_us">psi</string>
+    <string name="force_unit_us">lbf</string>
 
     <!-- Charts -->
     <string name="stress_chart_title">Gráfico da Tensão</string>
@@ -73,10 +72,13 @@
     <string name="stress_line_chart">Tensão Crítica x Comprimento</string>
     <string name="force_line_chart">Força Crítica x Comprimento</string>
     <string name="stress_curve">Curva da Tensão Crítica</string>
-    <string name="stress_axis">Tensão [MPa]</string>
     <string name="force_curve">Curva da Força Crítica</string>
-    <string name="force_axis">Força [N]</string>
-    <string name="length_axis">Comprimento [m]</string>
+    <string name="stress_axis_si">Tensão [MPa]</string>
+    <string name="force_axis_si">Força [N]</string>
+    <string name="length_axis_si">Comprimento [m]</string>
+    <string name="stress_axis_us">Tensão [psi]</string>
+    <string name="force_axis_us">Força [lbf]</string>
+    <string name="length_axis_us">Comprimento [in]</string>
 
     <!-- Options Menu -->
     <string name="share_option">Compartilhar</string>
@@ -100,6 +102,8 @@
     <!-- Units System Preferences -->
     <string name="drop_down_units_key">drop_down_units</string>
     <string name="select_units_system_title">Selecione o sistema</string>
+    <string name="si_value">SI</string>
+    <string name="us_value">US</string>
 
     <!-- Share -->
     <string name="share_title">Compartilhar com</string>

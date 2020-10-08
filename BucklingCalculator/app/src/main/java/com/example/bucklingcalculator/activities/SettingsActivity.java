@@ -1,15 +1,13 @@
-package com.example.bucklingcalculator;
+package com.example.bucklingcalculator.activities;
 
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
-import java.util.Locale;
+import com.example.bucklingcalculator.R;
 
 public class SettingsActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -37,9 +35,6 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
-        switchTheme(sharedPreferences.getBoolean(getString(R.string.switch_theme_key), false));
-        switchLanguage(sharedPreferences.getString(getString(R.string.drop_down_language_key),
-                getResources().getString(R.string.english_value)));
     }
 
     @Override
@@ -54,10 +49,8 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         if (key.equals(getString(R.string.switch_theme_key))) {
             switchTheme(sharedPreferences.getBoolean(key, false));
             recreate();
-        } else if (key.equals(getString(R.string.drop_down_language_key))) {
-            switchLanguage(sharedPreferences.getString(key,
-                    getResources().getString(R.string.english_value)));
-            recreate();
+        } else if (key.equals(getString(R.string.drop_down_units_key))) {
+            setUnit(key, sharedPreferences.getString(key, "SI"));
         }
     }
 
@@ -81,19 +74,10 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         }
     }
 
-    private void switchLanguage(Object newValue) {
-        Resources res = this.getResources();
-
-        // Change locale settings in the app.
-        DisplayMetrics dm = res.getDisplayMetrics();
-        android.content.res.Configuration conf = res.getConfiguration();
-
-        if (newValue.toString().equals(getResources().getString(R.string.portuguese_value)))
-            conf.setLocale(new Locale("pt", "BR"));
-        else
-            conf.setLocale(new Locale("en", "US"));
-
-        // Use conf.locale = new Locale(...) if targeting lower versions
-        res.updateConfiguration(conf, dm);
+    private void setUnit(String key, String value) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(key, value);
+        editor.apply();
     }
 }

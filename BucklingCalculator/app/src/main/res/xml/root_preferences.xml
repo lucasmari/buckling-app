@@ -26,12 +26,12 @@
             android:title="@string/theme_title"
             app:icon="@drawable/ic_brightness_3_24dp" />
 
-        <DropDownPreference
+        <!--<DropDownPreference
             android:entries="@array/language_array"
             android:entryValues="@array/language_array_values"
             android:key="@string/drop_down_language_key"
             android:title="@string/select_language_title"
-            app:icon="@drawable/ic_language_24dp" />
+            app:icon="@drawable/ic_language_24dp" />-->
 
     </PreferenceCategory>
 

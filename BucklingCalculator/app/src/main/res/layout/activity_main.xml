@@ -5,7 +5,7 @@
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <TextView
         android:id="@+id/introTextView"
@@ -43,6 +43,61 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/end_condition_tv"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+                app:layout_constraintStart_toStartOf="@id/textView1"
+                app:layout_constraintTop_toBottomOf="@+id/textView1" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/material_tv"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/spinner2"
+                app:layout_constraintStart_toStartOf="@id/spinner1"
+                app:layout_constraintTop_toBottomOf="@+id/spinner1" />
+
+            <Spinner
+                android:id="@+id/spinner2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/textView2"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/cross_section_tv"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/spinner2"
+                app:layout_constraintTop_toBottomOf="@id/spinner2" />
+
+            <Spinner
+                android:id="@+id/spinner3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/textView3"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
             <Button
                 android:id="@+id/clearButton"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -56,81 +111,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:strokeColor="@color/colorAccent"
                 tools:ignore="MissingPrefix" />
-
-            <Button
-                android:id="@+id/calculateButton"
-                style="@style/Widget.MaterialComponents.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="216dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="12dp"
-                android:backgroundTint="@color/design_default_color_primary"
-                android:text="@string/calculate_button"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:strokeColor="@color/design_default_color_primary"
-                tools:ignore="MissingPrefix"
-                tools:targetApi="lollipop" />
-
-            <CheckBox
-                android:id="@+id/checkBox"
-                android:layout_width="0dp"
-                android:layout_height="32dp"
-                android:layout_marginBottom="52dp"
-                android:text="@string/eccentricity_tv"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/editText3"
-                app:layout_constraintStart_toStartOf="@+id/editText2"
-                app:layout_constraintTop_toBottomOf="@id/editText2" />
-
-            <EditText
-                android:id="@+id/editText1"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="@string/hint_et"
-                android:inputType="number|numberDecimal"
-                android:text="@string/value_et"
-                android:textAlignment="textEnd"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/textView4"
-                tools:layout_editor_absoluteY="23dp"
-                tools:targetApi="o" />
-
-            <EditText
-                android:id="@+id/editText2"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="@string/hint_et"
-                android:inputType="number|numberDecimal"
-                android:text="@string/value_et"
-                android:textAlignment="textEnd"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@id/textView5"
-                app:layout_constraintTop_toBottomOf="@+id/textView5"
-                tools:targetApi="o" />
-
-            <EditText
-                android:id="@+id/editText3"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:ems="10"
-                android:enabled="false"
-                android:hint="@string/hint_et"
-                android:inputType="number|numberDecimal"
-                android:text="@string/value_et"
-                android:textAlignment="textEnd"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@id/checkBox"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox"
-                tools:targetApi="o" />
 
             <ImageView
                 android:id="@+id/columnImageView"
@@ -151,62 +131,6 @@
                 app:srcCompat="@mipmap/img_column_pinned_pinned"
                 tools:targetApi="lollipop" />
 
-
-            <Spinner
-                android:id="@+id/spinner1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:spinnerMode="dropdown"
-                app:layout_constraintStart_toStartOf="@id/textView1"
-                app:layout_constraintTop_toBottomOf="@+id/textView1" />
-
-            <Spinner
-                android:id="@+id/spinner2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-            <Spinner
-                android:id="@+id/spinner3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/textView3"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/end_condition_tv"
-                android:textAlignment="center"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/material_tv"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/spinner2"
-                app:layout_constraintStart_toStartOf="@id/spinner1"
-                app:layout_constraintTop_toBottomOf="@+id/spinner1" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/cross_section_tv"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@id/spinner2"
-                app:layout_constraintTop_toBottomOf="@id/spinner2" />
-
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="0dp"
@@ -218,6 +142,18 @@
                 app:layout_constraintStart_toEndOf="@+id/columnImageView"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <com.tobiasschuerg.prefixsuffix.PrefixSuffixEditText
+                android:id="@+id/editText1"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/hint_et"
+                android:inputType="number|numberDecimal"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="0dp"
@@ -228,6 +164,60 @@
                 app:layout_constraintBottom_toTopOf="@+id/editText2"
                 app:layout_constraintStart_toStartOf="@+id/editText1"
                 app:layout_constraintTop_toBottomOf="@id/editText1" />
+
+            <com.tobiasschuerg.prefixsuffix.PrefixSuffixEditText
+                android:id="@+id/editText2"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/hint_et"
+                android:inputType="number|numberDecimal"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/textView5"
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_marginBottom="52dp"
+                android:text="@string/eccentricity_tv"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/editText3"
+                app:layout_constraintStart_toStartOf="@+id/editText2"
+                app:layout_constraintTop_toBottomOf="@id/editText2" />
+
+            <com.tobiasschuerg.prefixsuffix.PrefixSuffixEditText
+                android:id="@+id/editText3"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:ems="10"
+                android:enabled="false"
+                android:hint="@string/hint_et"
+                android:inputType="number|numberDecimal"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/checkBox"
+                app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+
+            <Button
+                android:id="@+id/calculateButton"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="216dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="@color/design_default_color_primary"
+                android:text="@string/calculate_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@color/design_default_color_primary"
+                tools:ignore="MissingPrefix"
+                tools:targetApi="lollipop" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

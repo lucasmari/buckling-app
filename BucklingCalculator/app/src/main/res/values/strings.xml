@@ -22,8 +22,7 @@
     <string name="calculate_button">CALCULATE</string>
 
     <!-- EditTexts -->
-    <string name="value_et">0</string>
-    <string name="hint_et"> </string>
+    <string name="hint_et">0</string>
 
     <!-- Spinner Items 1 | End Condition -->
     <string name="end_condition_1">Pinned-Pinned</string>
@@ -63,8 +62,8 @@
     <string name="safety_factor">Safety Factor</string>
     <string name="stress_unit_si">Pa</string>
     <string name="force_unit_si">N</string>
-    <string name="stress_unit_us"></string>
-    <string name="force_unit_us"></string>
+    <string name="stress_unit_us">psi</string>
+    <string name="force_unit_us">lbf</string>
 
     <!-- Charts -->
     <string name="stress_chart_title">Stress Chart</string>
@@ -72,10 +71,13 @@
     <string name="stress_line_chart">Critical Stress x Length</string>
     <string name="force_line_chart">Critical Force x Length</string>
     <string name="stress_curve">Critical Stress Curve</string>
-    <string name="stress_axis">Stress [MPa]</string>
     <string name="force_curve">Critical Force Curve</string>
-    <string name="force_axis">Force [N]</string>
-    <string name="length_axis">Length [m]</string>
+    <string name="stress_axis_si">Stress [MPa]</string>
+    <string name="force_axis_si">Force [N]</string>
+    <string name="length_axis_si">Length [m]</string>
+    <string name="stress_axis_us">Stress [psi]</string>
+    <string name="force_axis_us">Force [lbf]</string>
+    <string name="length_axis_us">Length [in]</string>
 
     <!-- Options Menu -->
     <string name="share_option">Share</string>
@@ -99,6 +101,8 @@
     <!-- Units System Preferences -->
     <string name="drop_down_units_key">drop_down_units</string>
     <string name="select_units_system_title">Select the system</string>
+    <string name="si_value">SI</string>
+    <string name="us_value">US</string>
 
     <!-- Share -->
     <string name="share_title">Share with</string>

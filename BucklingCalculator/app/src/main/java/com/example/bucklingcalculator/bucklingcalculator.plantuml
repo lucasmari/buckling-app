@@ -3,7 +3,7 @@
 title __BUCKLINGCALCULATOR's Class Diagram__\n
 
   namespace com.example.bucklingcalculator {
-    class com.example.bucklingcalculator.Chart {
+    class com.example.bucklingcalculator.models.Chart {
         - activityClass : Class
         - name : String
         + getName()
@@ -15,7 +15,7 @@ title __BUCKLINGCALCULATOR's Class Diagram__\n
   
 
   namespace com.example.bucklingcalculator {
-    class com.example.bucklingcalculator.CrossSections {
+    class com.example.bucklingcalculator.models.CrossSections {
         {static} + ITEMS : List<CrossSection>
         {static} + createCrossSection()
         {static} + editCrossSection()
@@ -26,7 +26,7 @@ title __BUCKLINGCALCULATOR's Class Diagram__\n
   
 
   namespace com.example.bucklingcalculator {
-    class com.example.bucklingcalculator.CrossSections.CrossSection {
+    class com.example.bucklingcalculator.models.CrossSections.CrossSection {
         + content : String
         + details : String
         + id : int
@@ -58,7 +58,7 @@ title __BUCKLINGCALCULATOR's Class Diagram__\n
   
 
   namespace com.example.bucklingcalculator {
-    class com.example.bucklingcalculator.CrossSectionsAdapter {
+    class com.example.bucklingcalculator.adapters.CrossSectionsAdapter {
         ~ fragmentManager : FragmentManager
         {static} - mValues : List<CrossSection>
         + CrossSectionsAdapter()
@@ -74,7 +74,7 @@ title __BUCKLINGCALCULATOR's Class Diagram__\n
   
 
   namespace com.example.bucklingcalculator {
-    class com.example.bucklingcalculator.CrossSectionsAdapter.EditDialogFragment {
+    class com.example.bucklingcalculator.adapters.CrossSectionsAdapter.EditDialogFragment {
         - position : int
         + onCreateView()
         - EditDialogFragment()
@@ -83,7 +83,7 @@ title __BUCKLINGCALCULATOR's Class Diagram__\n
   
 
   namespace com.example.bucklingcalculator {
-    class com.example.bucklingcalculator.CrossSectionsAdapter.ViewHolder {
+    class com.example.bucklingcalculator.adapters.CrossSectionsAdapter.ViewHolder {
         + mContentView : TextView
         + mDelete : ImageView
         + mDetails : TextView
@@ -180,7 +180,7 @@ title __BUCKLINGCALCULATOR's Class Diagram__\n
   
 
   namespace com.example.bucklingcalculator {
-    class com.example.bucklingcalculator.Materials {
+    class com.example.bucklingcalculator.models.Materials {
         {static} + ITEMS : List<Material>
         {static} + createMaterial()
         {static} + editMaterial()
@@ -191,7 +191,7 @@ title __BUCKLINGCALCULATOR's Class Diagram__\n
   
 
   namespace com.example.bucklingcalculator {
-    class com.example.bucklingcalculator.Materials.Material {
+    class com.example.bucklingcalculator.models.Materials.Material {
         + content : String
         + details : String
         + id : int
@@ -259,7 +259,7 @@ title __BUCKLINGCALCULATOR's Class Diagram__\n
   
 
   namespace com.example.bucklingcalculator {
-    class com.example.bucklingcalculator.Results {
+    class com.example.bucklingcalculator.models.Results {
         - name : String
         + getName()
         {static} ~ createResultsList()
@@ -361,25 +361,25 @@ title __BUCKLINGCALCULATOR's Class Diagram__\n
   }
   
 
-  com.example.bucklingcalculator.CrossSections +-down- com.example.bucklingcalculator.CrossSections.CrossSection
+  com.example.bucklingcalculator.models.CrossSections +-down- com.example.bucklingcalculator.models.CrossSections.CrossSection
   com.example.bucklingcalculator.CrossSectionsActivity .up.|> android.content.SharedPreferences.OnSharedPreferenceChangeListener
   com.example.bucklingcalculator.CrossSectionsActivity -up-|> androidx.appcompat.app.AppCompatActivity
   com.example.bucklingcalculator.CrossSectionsActivity +-down- com.example.bucklingcalculator.CrossSectionsActivity.AddDialogFragment
   com.example.bucklingcalculator.CrossSectionsActivity.AddDialogFragment -up-|> androidx.fragment.app.DialogFragment
-  com.example.bucklingcalculator.CrossSectionsAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
-  com.example.bucklingcalculator.CrossSectionsAdapter +-down- com.example.bucklingcalculator.CrossSectionsAdapter.EditDialogFragment
-  com.example.bucklingcalculator.CrossSectionsAdapter +-down- com.example.bucklingcalculator.CrossSectionsAdapter.ViewHolder
-  com.example.bucklingcalculator.CrossSectionsAdapter.EditDialogFragment -up-|> androidx.fragment.app.DialogFragment
-  com.example.bucklingcalculator.CrossSectionsAdapter.EditDialogFragment o-- com.example.bucklingcalculator.CrossSectionsAdapter : crossSectionAdapter
-  com.example.bucklingcalculator.CrossSectionsAdapter.ViewHolder -up-|> androidx.recyclerview.widget.RecyclerView.ViewHolder
-  com.example.bucklingcalculator.CrossSectionsAdapter.ViewHolder o-- com.example.bucklingcalculator.CrossSections.CrossSection : mItem
+  com.example.bucklingcalculator.adapters.CrossSectionsAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
+  com.example.bucklingcalculator.adapters.CrossSectionsAdapter +-down- com.example.bucklingcalculator.adapters.CrossSectionsAdapter.EditDialogFragment
+  com.example.bucklingcalculator.adapters.CrossSectionsAdapter +-down- com.example.bucklingcalculator.adapters.CrossSectionsAdapter.ViewHolder
+  com.example.bucklingcalculator.adapters.CrossSectionsAdapter.EditDialogFragment -up-|> androidx.fragment.app.DialogFragment
+  com.example.bucklingcalculator.adapters.CrossSectionsAdapter.EditDialogFragment o-- com.example.bucklingcalculator.adapters.CrossSectionsAdapter : crossSectionAdapter
+  com.example.bucklingcalculator.adapters.CrossSectionsAdapter.ViewHolder -up-|> androidx.recyclerview.widget.RecyclerView.ViewHolder
+  com.example.bucklingcalculator.adapters.CrossSectionsAdapter.ViewHolder o-- com.example.bucklingcalculator.models.CrossSections.CrossSection : mItem
   com.example.bucklingcalculator.ForceLineChartActivity .up.|> android.content.SharedPreferences.OnSharedPreferenceChangeListener
   com.example.bucklingcalculator.ForceLineChartActivity -up-|> androidx.appcompat.app.AppCompatActivity
   com.example.bucklingcalculator.ForceLineChartActivity +-down- com.example.bucklingcalculator.ForceLineChartActivity.CustomDataEntry
   com.example.bucklingcalculator.ForceLineChartActivity.CustomDataEntry -up-|> com.anychart.chart.common.dataentry.ValueDataEntry
   com.example.bucklingcalculator.MainActivity .up.|> android.content.SharedPreferences.OnSharedPreferenceChangeListener
   com.example.bucklingcalculator.MainActivity -up-|> androidx.appcompat.app.AppCompatActivity
-  com.example.bucklingcalculator.Materials +-down- com.example.bucklingcalculator.Materials.Material
+  com.example.bucklingcalculator.models.Materials +-down- com.example.bucklingcalculator.models.Materials.Material
   com.example.bucklingcalculator.MaterialsActivity .up.|> android.content.SharedPreferences.OnSharedPreferenceChangeListener
   com.example.bucklingcalculator.MaterialsActivity -up-|> androidx.appcompat.app.AppCompatActivity
   com.example.bucklingcalculator.MaterialsActivity +-down- com.example.bucklingcalculator.MaterialsActivity.AddDialogFragment
@@ -390,7 +390,7 @@ title __BUCKLINGCALCULATOR's Class Diagram__\n
   com.example.bucklingcalculator.MaterialsAdapter.EditDialogFragment -up-|> androidx.fragment.app.DialogFragment
   com.example.bucklingcalculator.MaterialsAdapter.EditDialogFragment o-- com.example.bucklingcalculator.MaterialsAdapter : materialsAdapter
   com.example.bucklingcalculator.MaterialsAdapter.ViewHolder -up-|> androidx.recyclerview.widget.RecyclerView.ViewHolder
-  com.example.bucklingcalculator.MaterialsAdapter.ViewHolder o-- com.example.bucklingcalculator.Materials.Material : mItem
+  com.example.bucklingcalculator.MaterialsAdapter.ViewHolder o-- com.example.bucklingcalculator.models.Materials.Material : mItem
   com.example.bucklingcalculator.ResultsAdapter -up-|> androidx.recyclerview.widget.RecyclerView.Adapter
   com.example.bucklingcalculator.ResultsAdapter +-down- com.example.bucklingcalculator.ResultsAdapter.ChartsViewHolder
   com.example.bucklingcalculator.ResultsAdapter +-down- com.example.bucklingcalculator.ResultsAdapter.ResultsViewHolder

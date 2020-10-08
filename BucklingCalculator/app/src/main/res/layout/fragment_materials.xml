@@ -9,5 +9,5 @@
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".MaterialsAdapter"
+    tools:context=".adapters.MaterialsAdapter"
     tools:listitem="@layout/fragment_item" />

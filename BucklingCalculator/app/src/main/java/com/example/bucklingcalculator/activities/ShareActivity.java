@@ -1,11 +1,13 @@
-package com.example.bucklingcalculator;
+package com.example.bucklingcalculator.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import static com.example.bucklingcalculator.MainActivity.results;
+import com.example.bucklingcalculator.R;
+
+import static com.example.bucklingcalculator.activities.MainActivity.results;
 
 public class ShareActivity extends AppCompatActivity {
 

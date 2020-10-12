@@ -35,6 +35,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bucklingcalculator.R;
 import com.example.bucklingcalculator.adapters.ResultsAdapter;
 import com.example.bucklingcalculator.models.Chart;
+import com.example.bucklingcalculator.models.Materials;
 import com.example.bucklingcalculator.models.Results;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.opencsv.CSVWriter;
@@ -124,7 +125,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         checkBox = findViewById(R.id.checkBox);
         editText3 = findViewById(R.id.editText3);
         editText3.setSuffix(" m");
-
         Button calculateButton = findViewById(R.id.calculateButton);
         Button clearButton = findViewById(R.id.clearButton);
         recyclerView = findViewById(R.id.resultsView);
@@ -206,8 +206,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                yieldStrength = Double.parseDouble(materials[1].get(position).toString());
-                elasticModulus = Double.parseDouble(materials[2].get(position).toString());
+                yieldStrength = Double.parseDouble(materials[1].get(position));
+                elasticModulus = Double.parseDouble(materials[2].get(position));
             }
 
             @Override
@@ -220,10 +220,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                area = Double.parseDouble(crossSections[1].get(position).toString());
-                centroidalDistance = Double.parseDouble(crossSections[2].get(position).toString());
-                gyrationRadius = Double.parseDouble(crossSections[3].get(position).toString());
-                inertiaMoment = Double.parseDouble(crossSections[4].get(position).toString());
+                area = Double.parseDouble(crossSections[1].get(position));
+                centroidalDistance = Double.parseDouble(crossSections[2].get(position));
+                gyrationRadius = Double.parseDouble(crossSections[3].get(position));
+                inertiaMoment = Double.parseDouble(crossSections[4].get(position));
             }
 
             @Override

@@ -32,11 +32,11 @@
 
     <!-- Materials ArrayLists Items -->
     <string name="material_1">Steel</string>
-    <string name="yield_strength_1">137.9E6</string>
-    <string name="elastic_modulus_1">82.74E9</string>
+    <string name="yield_strength_1">250E6</string>
+    <string name="elastic_modulus_1">200E9</string>
     <string name="material_2">Wood</string>
-    <string name="yield_strength_2">150E6</string>
-    <string name="elastic_modulus_2">90E9</string>
+    <string name="yield_strength_2">7.7E6</string>
+    <string name="elastic_modulus_2">5.4E9</string>
     <string name="yield_strength_title">Yield Strength</string>
     <string name="elastic_modulus_title">Elastic Modulus</string>
 

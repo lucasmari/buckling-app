@@ -10,7 +10,7 @@ import androidx.preference.PreferenceManager;
 
 import com.example.bucklingcalculator.R;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +44,17 @@ public class SplashActivity extends AppCompatActivity {
     public void setupSharedPreferences() {
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
     }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(getString(R.string.switch_theme_key))) {
+            switchTheme(sharedPreferences.getBoolean(key, false));
+            recreate();
+        }
+    }
+
 
     @Override
     public final void setTheme(final int resid) {

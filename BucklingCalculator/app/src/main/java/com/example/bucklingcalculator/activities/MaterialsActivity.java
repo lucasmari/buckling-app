@@ -18,6 +18,7 @@ import com.example.bucklingcalculator.R;
 import com.example.bucklingcalculator.adapters.MaterialsAdapter;
 import com.example.bucklingcalculator.models.Materials;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.tobiasschuerg.prefixsuffix.PrefixSuffixEditText;
 
 import static com.example.bucklingcalculator.activities.MainActivity.materials;
 
@@ -49,8 +50,10 @@ public class MaterialsActivity extends AppCompatActivity implements SharedPrefer
             View view = inflater.inflate(R.layout.dialog_add_material, container, false);
 
             EditText editText1 = view.findViewById(R.id.dialogEditText1);
-            EditText editText2 = view.findViewById(R.id.dialogEditText2);
-            EditText editText3 = view.findViewById(R.id.dialogEditText3);
+            PrefixSuffixEditText editText2 = view.findViewById(R.id.dialogEditText2);
+            editText2.setSuffix(" MPa");
+            PrefixSuffixEditText editText3 = view.findViewById(R.id.dialogEditText3);
+            editText3.setSuffix(" GPa");
 
             Button saveButton = view.findViewById(R.id.dialogSaveButton);
             saveButton.setOnClickListener(v -> {
@@ -79,7 +82,6 @@ public class MaterialsActivity extends AppCompatActivity implements SharedPrefer
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
-        /*switchUnit(sharedPreferences.getString(getString(R.string.drop_down_units_key), "SI"));*/
     }
 
     @Override
@@ -94,10 +96,7 @@ public class MaterialsActivity extends AppCompatActivity implements SharedPrefer
         if (key.equals(getString(R.string.switch_theme_key))) {
             switchTheme(sharedPreferences.getBoolean(key, false));
             recreate();
-        } /*else if (key.equals(getString(R.string.drop_down_units_key))) {
-            switchUnit(sharedPreferences.getString(key, "SI"));
-            recreate();
-        }*/
+        }
     }
 
     @Override
@@ -119,19 +118,4 @@ public class MaterialsActivity extends AppCompatActivity implements SharedPrefer
             this.setTheme(R.style.AppThemeLight);
         }
     }
-
-    /*private void switchUnit(String newValue) {
-        if (newValue.equals(getResources().getString(R.string.us_value))) {
-            editText1.setSuffix(" in");
-            editText2.setSuffix(" lbf");
-            editText3.setSuffix(" in");
-            usSystem = true;
-        }
-        else {
-            editText1.setSuffix(" m");
-            editText2.setSuffix(" N");
-            editText3.setSuffix(" m");
-            usSystem = false;
-        }
-    }*/
 }

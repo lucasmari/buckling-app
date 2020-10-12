@@ -28,10 +28,9 @@
         android:autofillHints=""
         android:hint="@string/material_tv"
         android:inputType="text"
-        android:textAlignment="textEnd"
         tools:targetApi="o" />
 
-    <EditText
+    <com.tobiasschuerg.prefixsuffix.PrefixSuffixEditText
         android:id="@+id/dialogEditText2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,10 +41,9 @@
         android:autofillHints=""
         android:hint="@string/yield_strength_title"
         android:inputType="text"
-        android:textAlignment="textEnd"
         tools:targetApi="o" />
 
-    <EditText
+    <com.tobiasschuerg.prefixsuffix.PrefixSuffixEditText
         android:id="@+id/dialogEditText3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,7 +54,6 @@
         android:autofillHints=""
         android:hint="@string/elastic_modulus_title"
         android:inputType="text"
-        android:textAlignment="textEnd"
         tools:targetApi="o" />
 
     <Button

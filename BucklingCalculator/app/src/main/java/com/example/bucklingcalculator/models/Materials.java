@@ -25,10 +25,8 @@ public class Materials {
     }
 
     private static String makeDetails(int position) {
-        StringBuilder builder = new StringBuilder();
-        builder.append(materialsProperties.get(0) + ": " + materials[1].get(position));
-        builder.append("\n" + materialsProperties.get(1) + ": " + materials[2].get(position));
-        return builder.toString();
+        return materialsProperties.get(0) + ": " + materials[1].get(position) + " MPa" +
+                "\n" + materialsProperties.get(1) + ": " + materials[2].get(position) + " GPa";
     }
 
     public static class Material {

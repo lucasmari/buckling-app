@@ -21,17 +21,16 @@ public class CrossSections {
     }
 
     public static CrossSection addCrossSection(int position) {
-        return new CrossSection(position, crossSections[0].get(position).toString(), makeDetails(position));
+        return new CrossSection(position, crossSections[0].get(position), makeDetails(position));
     }
 
 
     private static String makeDetails(int position) {
-        StringBuilder builder = new StringBuilder();
-        builder.append(crossSectionsProperties.get(0) + ": " + crossSections[1].get(position).toString());
-        builder.append("\n" + crossSectionsProperties.get(1) + ": " + crossSections[2].get(position).toString());
-        builder.append("\n" + crossSectionsProperties.get(2) + ": " + crossSections[3].get(position).toString());
-        builder.append("\n" + crossSectionsProperties.get(3) + ": " + crossSections[4].get(position).toString());
-        return builder.toString();
+        return crossSectionsProperties.get(0) + ": " + crossSections[1].get(position) + " m²" +
+                "\n" + crossSectionsProperties.get(1) + ": " + crossSections[2].get(position) + " m" +
+                "\n" + crossSectionsProperties.get(2) + ": " + crossSections[3].get(position) + " m" +
+                "\n" + crossSectionsProperties.get(3) + ": " + crossSections[4].get(position) +
+                " kg m²";
     }
 
     public static class CrossSection {

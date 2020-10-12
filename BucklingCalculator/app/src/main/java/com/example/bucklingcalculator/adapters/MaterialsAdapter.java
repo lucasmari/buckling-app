@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bucklingcalculator.R;
 import com.example.bucklingcalculator.models.Materials;
+import com.tobiasschuerg.prefixsuffix.PrefixSuffixEditText;
 
 import java.util.List;
 
@@ -104,22 +105,25 @@ public class MaterialsAdapter extends RecyclerView.Adapter<MaterialsAdapter.View
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.dialog_edit_material, container, false);
+
             EditText editText1 = view.findViewById(R.id.dialogEditText1);
             editText1.setText(materials[0].get(position));
-            EditText editText2 = view.findViewById(R.id.dialogEditText2);
+            PrefixSuffixEditText editText2 = view.findViewById(R.id.dialogEditText2);
+            editText2.setSuffix(" MPa");
             editText2.setText(materials[1].get(position));
-            EditText editText3 = view.findViewById(R.id.dialogEditText3);
+            PrefixSuffixEditText editText3 = view.findViewById(R.id.dialogEditText3);
+            editText3.setSuffix(" GPa");
             editText3.setText(materials[2].get(position));
+
             Button saveButton = view.findViewById(R.id.dialogSaveButton);
             saveButton.setOnClickListener(v -> {
                 materials[0].set(position, editText1.getText().toString());
                 materials[1].set(position, editText2.getText().toString());
                 materials[2].set(position, editText3.getText().toString());
-                materialsAdapter.editItem(Materials.addMaterial(
-                        position),
-                        position);
+                materialsAdapter.editItem(Materials.addMaterial(position), position);
                 EditDialogFragment.this.dismiss();
             });
+
             Button cancelButton = view.findViewById(R.id.dialogCancelButton);
             cancelButton.setOnClickListener(v -> EditDialogFragment.this.getDialog().cancel());
 

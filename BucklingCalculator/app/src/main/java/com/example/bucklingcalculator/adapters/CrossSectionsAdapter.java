@@ -105,6 +105,7 @@ public class CrossSectionsAdapter extends RecyclerView.Adapter<CrossSectionsAdap
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.dialog_edit_cross_section, container, false);
+
             EditText editText1 = view.findViewById(R.id.dialogEditText1);
             editText1.setText(crossSections[0].get(position));
             EditText editText2 = view.findViewById(R.id.dialogEditText2);
@@ -115,6 +116,7 @@ public class CrossSectionsAdapter extends RecyclerView.Adapter<CrossSectionsAdap
             editText4.setText(crossSections[3].get(position));
             EditText editText5 = view.findViewById(R.id.dialogEditText5);
             editText5.setText(crossSections[4].get(position));
+
             Button saveButton = view.findViewById(R.id.dialogSaveButton);
             saveButton.setOnClickListener(v -> {
                 crossSections[0].set(position, editText1.getText().toString());
@@ -122,10 +124,10 @@ public class CrossSectionsAdapter extends RecyclerView.Adapter<CrossSectionsAdap
                 crossSections[2].set(position, editText3.getText().toString());
                 crossSections[3].set(position, editText4.getText().toString());
                 crossSections[4].set(position, editText5.getText().toString());
-                crossSectionAdapter.editItem(CrossSections.addCrossSection(position),
-                        position);
+                crossSectionAdapter.editItem(CrossSections.addCrossSection(position), position);
                 EditDialogFragment.this.dismiss();
             });
+
             Button cancelButton = view.findViewById(R.id.dialogCancelButton);
             cancelButton.setOnClickListener(v -> EditDialogFragment.this.getDialog().cancel());
 

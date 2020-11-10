@@ -444,7 +444,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             criticalStress =
                     (load / area) * (1 + ((eccentricity * centroidalDistance) / Math.pow(gyrationRadius, 2)) * Math.acos(((effectiveLengthFactor * length) / (2 * gyrationRadius)) * Math.sqrt(load / (area * elasticModulus))));
 
-            for (double i = 0; i < 4; i += 0.1) {
+            for (double i = 0; i <= 4; i += 0.1) {
                 criticalStressByLength.add((load / area) * (1 + ((eccentricity * centroidalDistance) / Math.pow(gyrationRadius, 2)) * Math.acos(((effectiveLengthFactor * i) / (2 * gyrationRadius)) * Math.sqrt(load / (area * elasticModulus)))));
             }
         } else {
@@ -462,7 +462,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             for (double i = 0; i < calculateTransitionLength(); i += 0.1) {
                 criticalStressByLength.add(yieldStrength - (Math.pow((yieldStrength * effectiveLengthFactor * i) / (2 * Math.PI * gyrationRadius), 2)) * (1 / elasticModulus));
             }
-            for (double i = calculateTransitionLength(); i < 4; i += 0.1) {
+            for (double i = calculateTransitionLength(); i <= 4; i += 0.1) {
                 criticalStressByLength.add((Math.pow(Math.PI, 2) * elasticModulus) / Math.pow((effectiveLengthFactor * i / gyrationRadius), 2));
             }
         }

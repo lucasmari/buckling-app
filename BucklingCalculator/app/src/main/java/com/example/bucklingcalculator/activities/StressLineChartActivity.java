@@ -61,8 +61,9 @@ public class StressLineChartActivity extends AppCompatActivity implements Shared
 
         List<DataEntry> seriesData = new ArrayList<>();
         int j = 0;
-        for (double i = 0; i < 4; i += 0.1) {
-            seriesData.add(new CustomDataEntry(String.valueOf(i), criticalStressByLength.get(j)));
+        for (double i = 0; i <= 4; i += 0.1) {
+            seriesData.add(new CustomDataEntry(String.format("%.1f", i),
+                    criticalStressByLength.get(j)));
             j++;
         }
 

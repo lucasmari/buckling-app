@@ -61,9 +61,8 @@ public class ForceLineChartActivity extends AppCompatActivity implements SharedP
 
         List<DataEntry> seriesData = new ArrayList<>();
         int j = 0;
-        for (double i = 0; i < length; i += 0.1) {
-            seriesData.add(new CustomDataEntry(String.valueOf(i),
-                    criticalForceByLength.get(j)));
+        for (double i = 0; i < 4; i += 0.1) {
+            seriesData.add(new CustomDataEntry(String.valueOf(i),criticalForceByLength.get(j)));
             j++;
         }
 

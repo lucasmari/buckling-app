@@ -25,11 +25,11 @@ public class CrossSectionsActivity extends AppCompatActivity implements SharedPr
 
     private static CrossSectionsAdapter crossSectionsAdapter;
 
-    private EditText editText1;
-    private EditText editText2;
-    private EditText editText3;
-    private EditText editText4;
-    private EditText editText5;
+    private static EditText editText1;
+    private static EditText editText2;
+    private static EditText editText3;
+    private static EditText editText4;
+    private static EditText editText5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class CrossSectionsActivity extends AppCompatActivity implements SharedPr
         fab.setOnClickListener(view -> showAddDialog());
     }
 
-    private class AddDialogFragment extends DialogFragment {
+    public static class AddDialogFragment extends DialogFragment {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -59,7 +59,6 @@ public class CrossSectionsActivity extends AppCompatActivity implements SharedPr
             editText2 = view.findViewById(R.id.dialogEditText2);
             editText3 = view.findViewById(R.id.dialogEditText3);
             editText4 = view.findViewById(R.id.dialogEditText4);
-            editText5 = view.findViewById(R.id.dialogEditText5);
 
             Button saveButton = view.findViewById(R.id.dialogSaveButton);
             saveButton.setOnClickListener(v -> {
@@ -74,7 +73,7 @@ public class CrossSectionsActivity extends AppCompatActivity implements SharedPr
         }
     }
 
-    private void saveCrossSection() {
+    private static void saveCrossSection() {
         crossSections[0].add(editText1.getText().toString());
         crossSections[1].add(editText2.getText().toString());
         crossSections[2].add(editText3.getText().toString());

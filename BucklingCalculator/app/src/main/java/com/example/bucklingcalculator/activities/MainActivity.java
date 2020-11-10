@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private double area;
     private double centroidalDistance;
     private double gyrationRadius;
-    private double inertiaMoment;
 
     // EditTexts variables
     public static double length = 0;
@@ -171,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                         if (theme)
                             columnImageView.setImageResource(R.mipmap.img_column_fixed_pinned_dark);
                         else
-                        columnImageView.setImageResource(R.mipmap.img_column_fixed_pinned);
+                            columnImageView.setImageResource(R.mipmap.img_column_fixed_pinned);
                         columnImageView.startAnimation(fade_in);
                         break;
                     case 3:
@@ -180,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                         if (theme)
                             columnImageView.setImageResource(R.mipmap.img_column_fixed_free_dark);
                         else
-                        columnImageView.setImageResource(R.mipmap.img_column_fixed_free);
+                            columnImageView.setImageResource(R.mipmap.img_column_fixed_free);
                         columnImageView.startAnimation(fade_in);
                         break;
                     case 0:
@@ -190,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                         if (theme)
                             columnImageView.setImageResource(R.mipmap.img_column_pinned_pinned_dark);
                         else
-                        columnImageView.setImageResource(R.mipmap.img_column_pinned_pinned);
+                            columnImageView.setImageResource(R.mipmap.img_column_pinned_pinned);
                         columnImageView.startAnimation(fade_in);
                         break;
                 }
@@ -223,7 +222,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 area = Double.parseDouble(crossSections[1].get(position));
                 centroidalDistance = Double.parseDouble(crossSections[2].get(position));
                 gyrationRadius = Double.parseDouble(crossSections[3].get(position));
-                inertiaMoment = Double.parseDouble(crossSections[4].get(position));
             }
 
             @Override
@@ -241,6 +239,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             }
 
             if (validInputs(editText1, editText2, editText3)) {
+                results.clear();
+                criticalStressByLength.clear();
+                criticalForceByLength.clear();
 
                 length = Double.parseDouble(editText1.getText().toString());
                 load = Double.parseDouble(editText2.getText().toString());
@@ -268,10 +269,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         // Checkbox listener
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (checkBox.isChecked())
-                editText3.setEnabled(true);
-            else
-                editText3.setEnabled(false);
+            editText3.setEnabled(checkBox.isChecked());
         });
 
         setupSharedPreferences();
@@ -342,16 +340,12 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         crossSections[3] = new ArrayList();
         crossSections[3].add(getString(R.string.gyration_radius_1));
         crossSections[3].add(getString(R.string.gyration_radius_2));
-        crossSections[4] = new ArrayList();
-        crossSections[4].add(getString(R.string.inertia_moment_1));
-        crossSections[4].add(getString(R.string.inertia_moment_2));
     }
 
     public void initializeCrossSectionsProperties() {
         crossSectionsProperties.add(getString(R.string.area_title));
         crossSectionsProperties.add(getString(R.string.centroidal_distance_title));
         crossSectionsProperties.add(getString(R.string.gyration_radius_title));
-        crossSectionsProperties.add(getString(R.string.inertia_moment_title));
     }
 
     public void initializeResults() {
@@ -436,32 +430,40 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         return true;
     }
 
+    public double calculateTransitionSlendernessRatio() {
+        return Math.sqrt((2 * Math.pow(Math.PI, 2) * elasticModulus) / (Math.pow(effectiveLengthFactor, 2) * yieldStrength));
+    }
+
+    public double calculateTransitionLength() {
+        return calculateTransitionSlendernessRatio() * gyrationRadius;
+    }
+
     public double calculateCriticalStress() {
-        if (checkBox.isChecked() && !editText3.getText().toString().equals("")) {
+        if (checkBox.isChecked()) {
+            // Secant equation
             criticalStress =
                     (load / area) * (1 + ((eccentricity * centroidalDistance) / Math.pow(gyrationRadius, 2)) * Math.acos(((effectiveLengthFactor * length) / (2 * gyrationRadius)) * Math.sqrt(load / (area * elasticModulus))));
 
-            for (double i = 0; i < length; i += 0.1) {
+            for (double i = 0; i < 4; i += 0.1) {
                 criticalStressByLength.add((load / area) * (1 + ((eccentricity * centroidalDistance) / Math.pow(gyrationRadius, 2)) * Math.acos(((effectiveLengthFactor * i) / (2 * gyrationRadius)) * Math.sqrt(load / (area * elasticModulus)))));
             }
         } else {
-            if (length < 1.47) {
+            if (length < calculateTransitionLength()) {
+                // Johnson equation
                 criticalStress =
                         yieldStrength - (Math.pow((yieldStrength * effectiveLengthFactor * length) / (2 * Math.PI * gyrationRadius), 2)) * (1 / elasticModulus);
-
-                for (double i = 0; i < length; i += 0.1) {
-                    criticalStressByLength.add(yieldStrength - (Math.pow((yieldStrength * effectiveLengthFactor * i) / (2 * Math.PI * gyrationRadius), 2)) * (1 / elasticModulus));
-                }
             } else {
+                // Euler equation
                 criticalStress =
                         (Math.pow(Math.PI, 2) * elasticModulus) / Math.pow((effectiveLengthFactor * length / gyrationRadius), 2);
+            }
 
-                for (double i = 0; i < 1.47; i += 0.1) {
-                    criticalStressByLength.add(yieldStrength - (Math.pow((yieldStrength * effectiveLengthFactor * i) / (2 * Math.PI * gyrationRadius), 2)) * (1 / elasticModulus));
-                }
-                for (double i = 1.47; i < length; i += 0.1) {
-                    criticalStressByLength.add((Math.pow(Math.PI, 2) * elasticModulus) / Math.pow((effectiveLengthFactor * i / gyrationRadius), 2));
-                }
+            // Data for the chart
+            for (double i = 0; i < calculateTransitionLength(); i += 0.1) {
+                criticalStressByLength.add(yieldStrength - (Math.pow((yieldStrength * effectiveLengthFactor * i) / (2 * Math.PI * gyrationRadius), 2)) * (1 / elasticModulus));
+            }
+            for (double i = calculateTransitionLength(); i < 4; i += 0.1) {
+                criticalStressByLength.add((Math.pow(Math.PI, 2) * elasticModulus) / Math.pow((effectiveLengthFactor * i / gyrationRadius), 2));
             }
         }
 
@@ -474,7 +476,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         for (int i = 0; i < criticalStressByLength.size(); i++) {
             criticalForceByLength.add(criticalStressByLength.get(i) * area);
         }
-
 
         return criticalForce;
     }

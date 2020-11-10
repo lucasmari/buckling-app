@@ -26,32 +26,20 @@
     <string name="hint_et">0</string>
 
     <!-- Spinner Items 1 | End Condition -->
-    <string name="end_condition_1">Fixado-Fixado</string>
-    <string name="end_condition_2">Engastado-Engastado</string>
-    <string name="end_condition_3">Engastado-Fixado</string>
-    <string name="end_condition_4">Engastado-Livre</string>
+    <string name="end_condition_1">Articulada-Articulada</string>
+    <string name="end_condition_2">Engastada-Engastada</string>
+    <string name="end_condition_3">Engastada-Articulada</string>
+    <string name="end_condition_4">Engastada-Livre</string>
 
     <!-- Materials ArrayLists Items -->
-    <string name="material_1">Aço</string>
-    <string name="yield_strength_1">250E6</string>
-    <string name="elastic_modulus_1">200E9</string>
-    <string name="material_2">Madeira</string>
-    <string name="yield_strength_2">7.7E6</string>
-    <string name="elastic_modulus_2">5.4E9</string>
+    <string name="material_1">Aço (ASTM-A36)</string>
+    <string name="material_2">Alumínio (1100-H14)</string>
     <string name="yield_strength_title">Tensão de Escoamento</string>
     <string name="elastic_modulus_title">Módulo de Elasticidade</string>
 
     <!-- Cross Sections ArrayLists Items -->
     <string name="cross_section_1">Retangular</string>
-    <string name="area_1">5.161E-3</string>
-    <string name="centroidal_distance_1">2.54E-2</string>
-    <string name="gyration_radius_1">1.466E-2</string>
-    <string name="inertia_moment_1">1.11E-3</string>
     <string name="cross_section_2">Circular</string>
-    <string name="area_2">5.067E-4</string>
-    <string name="centroidal_distance_2">1.27E-2</string>
-    <string name="gyration_radius_2">6.35E-3</string>
-    <string name="inertia_moment_2">2.043E-5</string>
     <string name="area_title">Área</string>
     <string name="centroidal_distance_title">Distância do Centróide</string>
     <string name="gyration_radius_title">Raio de Giração</string>

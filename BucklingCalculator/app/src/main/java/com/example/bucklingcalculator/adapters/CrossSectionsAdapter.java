@@ -114,8 +114,6 @@ public class CrossSectionsAdapter extends RecyclerView.Adapter<CrossSectionsAdap
             editText3.setText(crossSections[2].get(position));
             EditText editText4 = view.findViewById(R.id.dialogEditText4);
             editText4.setText(crossSections[3].get(position));
-            EditText editText5 = view.findViewById(R.id.dialogEditText5);
-            editText5.setText(crossSections[4].get(position));
 
             Button saveButton = view.findViewById(R.id.dialogSaveButton);
             saveButton.setOnClickListener(v -> {
@@ -123,7 +121,6 @@ public class CrossSectionsAdapter extends RecyclerView.Adapter<CrossSectionsAdap
                 crossSections[1].set(position, editText2.getText().toString());
                 crossSections[2].set(position, editText3.getText().toString());
                 crossSections[3].set(position, editText4.getText().toString());
-                crossSections[4].set(position, editText5.getText().toString());
                 crossSectionAdapter.editItem(CrossSections.addCrossSection(position), position);
                 EditDialogFragment.this.dismiss();
             });

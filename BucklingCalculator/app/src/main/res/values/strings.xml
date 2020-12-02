@@ -14,7 +14,13 @@
     <string name="eccentricity_tv">Eccentricity</string>
     <string name="results_tv">Results</string>
 
-    <!-- Others -->
+    <!-- Toasts -->
+    <string name="length_empty">Length not set!</string>
+    <string name="load_empty">Load not set!</string>
+    <string name="eccentricity_empty">Eccentricity not set!</string>
+    <string name="load_error">Load too big!</string>
+
+    <!-- ImageView -->
     <string name="column_image_content">Column image</string>
 
     <!-- Buttons -->
@@ -46,9 +52,9 @@
     <string name="centroidal_distance_1" translatable="false">1.5E-2</string>
     <string name="gyration_radius_1" translatable="false">8.66E-3</string>
     <string name="cross_section_2">Circle</string>
-    <string name="area_2" translatable="false">5.067E-4</string>
-    <string name="centroidal_distance_2" translatable="false">1.27E-2</string>
-    <string name="gyration_radius_2" translatable="false">6.35E-3</string>
+    <string name="area_2" translatable="false">2.83E-3</string>
+    <string name="centroidal_distance_2" translatable="false">3E-2</string>
+    <string name="gyration_radius_2" translatable="false">1.5E-2</string>
     <string name="area_title">Area</string>
     <string name="centroidal_distance_title">Centroidal Distance</string>
     <string name="gyration_radius_title">Gyration Radius</string>

@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.transition.TransitionManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -392,7 +393,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public void reloadSpinnerAdapter2(Spinner spinner2) {
         List<String> spinnerArray = new ArrayList<>();
         for (int i = 0; i < materials[0].size(); i++) {
-            spinnerArray.add(materials[0].get(i).toString());
+            spinnerArray.add(materials[0].get(i));
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
@@ -402,9 +403,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     public void reloadSpinnerAdapter3(Spinner spinner3) {
         List<String> spinnerArray = new ArrayList<>();
-        for (int i = 0; i < crossSections[0].size(); i++) {
-            spinnerArray.add(crossSections[0].get(i).toString());
-        }
+        spinnerArray.addAll(crossSections[0]);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this, R.layout.item_spinner, spinnerArray);
@@ -413,17 +412,18 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     public boolean validInputs(EditText editText1, EditText editText2, EditText editText3) {
         if (editText1.getText().toString().equals("")) {
-            Toast.makeText(getApplicationContext(), "Length not set!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.length_empty),
+                    Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (editText2.getText().toString().equals("")) {
-            Toast.makeText(getApplicationContext(), "Load not set!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.load_empty), Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (editText3.getText().toString().equals("") && checkBox.isChecked()) {
-            Toast.makeText(getApplicationContext(), "Eccentricity not set!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.eccentricity_empty), Toast.LENGTH_SHORT).show();
             return false;
         }
 
@@ -440,12 +440,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     public double calculateCriticalStress() {
         if (checkBox.isChecked()) {
+            double x =
+                    ((effectiveLengthFactor * length) / (2 * gyrationRadius)) * Math.sqrt(load / (area * elasticModulus));
+
+            Log.d("cos", String.valueOf(x));
             // Secant equation
             criticalStress =
-                    (load / area) * (1 + ((eccentricity * centroidalDistance) / Math.pow(gyrationRadius, 2)) * Math.acos(((effectiveLengthFactor * length) / (2 * gyrationRadius)) * Math.sqrt(load / (area * elasticModulus))));
+                    (load / area) * (1 + ((eccentricity * centroidalDistance) / Math.pow(gyrationRadius, 2)) * (1 / Math.cos(x)));
 
             for (double i = 0; i <= 4; i += 0.1) {
-                criticalStressByLength.add((load / area) * (1 + ((eccentricity * centroidalDistance) / Math.pow(gyrationRadius, 2)) * Math.acos(((effectiveLengthFactor * i) / (2 * gyrationRadius)) * Math.sqrt(load / (area * elasticModulus)))));
+                criticalStressByLength.add((load / area) * (1 + ((eccentricity * centroidalDistance) / Math.pow(gyrationRadius, 2)) * (1 / Math.cos(x))));
             }
         } else {
             if (length < calculateTransitionLength()) {

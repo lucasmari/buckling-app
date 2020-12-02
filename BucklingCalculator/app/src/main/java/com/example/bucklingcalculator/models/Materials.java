@@ -25,8 +25,8 @@ public class Materials {
     }
 
     private static String makeDetails(int position) {
-        return materialsProperties.get(0) + ": " + materials[1].get(position) + " MPa" +
-                "\n" + materialsProperties.get(1) + ": " + materials[2].get(position) + " GPa";
+        return materialsProperties.get(0) + ": " + materials[1].get(position) + " Pa" +
+                "\n" + materialsProperties.get(1) + ": " + materials[2].get(position) + " Pa";
     }
 
     public static class Material {

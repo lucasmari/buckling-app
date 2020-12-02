@@ -6,14 +6,20 @@
     deformação a partir de forças axiais compressivas, resultando na flexão da coluna,
         devido sua instabilidade. Os fatores que determinam como ou se uma coluna irá flambar
         são: comprimento, resistência, condição da extremidade, área da seção transversal, carga e
-        ecentricidade.</string>
+        excentricidade.</string>
     <string name="end_condition_tv">Extremidade</string>
     <string name="load_tv">Carga</string>
     <string name="material_tv">Material</string>
     <string name="cross_section_tv">Seção Transversal</string>
     <string name="length_tv">Comprimento</string>
-    <string name="eccentricity_tv">Ecentricidade</string>
+    <string name="eccentricity_tv">Excentricidade</string>
     <string name="results_tv">Resultados</string>
+
+    <!-- Toasts -->
+    <string name="length_empty">Comprimento não estabelecido!</string>
+    <string name="load_empty">Carga não estabelecida!</string>
+    <string name="eccentricity_empty">Excentricidade não estabelecida!</string>
+    <string name="load_error">Carga muito grande!</string>
 
     <!-- ImageView -->
     <string name="column_image_content">Imagem da coluna</string>

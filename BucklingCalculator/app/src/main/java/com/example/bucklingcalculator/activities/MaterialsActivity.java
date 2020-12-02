@@ -51,9 +51,9 @@ public class MaterialsActivity extends AppCompatActivity implements SharedPrefer
 
             EditText editText1 = view.findViewById(R.id.dialogEditText1);
             PrefixSuffixEditText editText2 = view.findViewById(R.id.dialogEditText2);
-            editText2.setSuffix(" MPa");
+            editText2.setSuffix(" Pa");
             PrefixSuffixEditText editText3 = view.findViewById(R.id.dialogEditText3);
-            editText3.setSuffix(" GPa");
+            editText3.setSuffix(" Pa");
 
             Button saveButton = view.findViewById(R.id.dialogSaveButton);
             saveButton.setOnClickListener(v -> {
